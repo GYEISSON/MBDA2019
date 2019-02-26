@@ -1,0 +1,14 @@
+/*
+Enter your query here.
+*/
+
+select CASE 
+    when  ((A+B>C)and(A+C>B)and(B+C>A))
+          AND (A=B AND B=C) THEN "Equilateral"
+    when  (A+B>C) and (A+C>B) and (B+C>A)
+          AND (A=B AND B<>C) OR (B = C AND C<>A) or (C=A and B<>A)  THEN "Isosceles"
+    when  (A+B>C) and (A+C>B) and (B+C>A)
+          AND (A<>B AND B<>C) THEN "Scalene"
+    ElSE "Not A Triangle"
+    END
+FROM TRIANGLES;
