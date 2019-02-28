@@ -36,7 +36,7 @@ CREATE TABLE Guest(
 ALTER TABLE Guest ADD CONSTRAINT GUESTID PRIMARY KEY(id) ;
 
 CREATE TABLE Booking (
-    booking_id VARCHAR(6) NOT NULL,
+    booking_id NUMBER(100) NOT NULL,
     booking_date DATE NOT NULL,
     room_no VARCHAR(6) NOT NULL,
     guest_id  VARCHAR2(6) NOT NULL,
@@ -61,7 +61,17 @@ CREATE TABLE Extra(
 );
 
 
---pob
+--poblar
+insert into rate values (N'double',1,56.00);
+insert into rate values (N'double',2,72.00);
+insert into rate values (N'family',1,56.00);
+insert into rate values (N'family',2,72.00);
+insert into rate values (N'family',3,84.00);
+insert into rate values (N'single',1,48.00);
+insert into rate values (N'twin',1,50.00);
+insert into rate values (N'twin',2,72.00);
+
+
 
 
 
