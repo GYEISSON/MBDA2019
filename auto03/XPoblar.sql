@@ -1,0 +1,11 @@
+DROP TABLE Room;
+
+DROP TABLE Booking;
+
+DROP TABLE Guest;
+
+DROP TABLE Extra;
+
+DROP TABLE Rate;
+
+DROP TABLE Room_type;
