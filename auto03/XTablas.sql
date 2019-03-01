@@ -1,11 +1,12 @@
-DELETE FROM Room;
 
-DELETE FROM Rate;
+DROP TABLE Room;
 
-DELETE FROM Room_type;
+DROP TABLE Booking;
 
-DELETE FROM Extra;
+DROP TABLE Guest;
 
-DELETE FROM Guest;
+DROP TABLE Extra;
 
-DELETE FROM Booking;
+DROP TABLE Rate;
+
+DROP TABLE Room_type;
