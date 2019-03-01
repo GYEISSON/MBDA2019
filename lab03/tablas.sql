@@ -64,12 +64,12 @@ CREATE TABLE EsSubtema(
     nombreTemaB VARCHAR(50) NOT NULL
 );
 
-CREATE TABLE Asignaturas(
+CREATE TABLE Asignatura(
     sigla VARCHAR(5) NOT NULL,
     nombre VARCHAR(15) NOT NULL
 );
 
-CREATE TABLE Tratan(
+CREATE TABLE Trata(
     nivel VARCHAR(20) NOT NULL,
     porcentaje NUMBER(5) NOT NULL,
     tema VARCHAR2(50) NOT NULL,

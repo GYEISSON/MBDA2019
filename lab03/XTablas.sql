@@ -1,0 +1,14 @@
+DROP  TABLE Perfil;
+DROP  TABLE Opinion;
+DROP  TABLE Adjetivo;
+DROP  TABLE Consulta;
+DROP  TABLE Temporal;
+DROP  TABLE Etiqueta;
+DROP  TABLE Tema;
+DROP  TABLE Palabra;
+DROP  TABLE EsPrerrequisito;
+DROP  TABLE EsSubtema;
+DROP  TABLE Asignatura;
+DROP  TABLE Trata;
+DROP  TABLE Filtro;
+DROP  TABLE ContenidoFiltro;
