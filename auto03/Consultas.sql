@@ -45,4 +45,30 @@ WHERE booking.guest_id = guest.id and
     booking.room_type_requested = rate.room_type and 
     first_name = 'Ruth' and last_name = 'Cadbury'
 
+--7
 
+SELECT sum((booking.nights * rate.amount) + 
+(select sum(amount)from extra where booking_id = 5346))
+FROM rate, booking
+WHERE booking.room_type_requested = rate.room_type and 
+booking.occupants = rate.occupancy and booking.booking_id = 5346
+
+--8
+SELECT g.first_name,g.last_name,g.address
+FROM booking b  right join guest g on (b.guest_id=g.id)
+WHERE g.address like('%Edinburgh%')
+ORDER BY g.last_name
+
+/*-9
+
+SELECT booking_date,count(booking_id)
+FROM booking
+WHERE booking_date >= '2016-11-25' and 
+booking_date <= '2016-12-01'
+GROUP BY booking_date
+*/
+ -- 10
+ SELECT sum(b.occupants )
+ FROM booking b left join guest g on b.guest_id = g.id
+ WHERE b.booking_date = '2016-11-21'
+ 
