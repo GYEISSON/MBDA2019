@@ -22,7 +22,7 @@ CREATE TABLE Adjetivo(
 );
 
 CREATE TABLE Consulta(
-    fecha DATE NOT NULL,
+    fecha VARCHAR2(20) NOT NULL,
     perfil VARCHAR2(50) NOT NULL, 
     contenido VARCHAR2(70) NOT NULL
 );

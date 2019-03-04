@@ -157,13 +157,13 @@ insert into filtro values ('suspense', 'rutrum neque aenean');
 
 
 
-insert into ContenidoFiltro values ('incremental', 'superstructure');
+insert into ContenidoFiltro values ('incremental', 'structure');
 insert into ContenidoFiltro values ('Secured', 'responsive');
 insert into ContenidoFiltro values ('static', 'responsive');
-insert into ContenidoFiltro values ('Intuitive', 'Public-key');
+insert into ContenidoFiltro values ('Intuitive', 'Public');
 insert into ContenidoFiltro values ('model', 'migration');
 insert into ContenidoFiltro values ('alliance', 'Extended');
-insert into ContenidoFiltro values ('intangible', 'Grass-roots');
-insert into ContenidoFiltro values ('real-time', 'Assimilated');
-insert into ContenidoFiltro values ('application', 'even-keeled');
+insert into ContenidoFiltro values ('intangible', 'Grass');
+insert into ContenidoFiltro values ('real-time', 'Assimilate');
+insert into ContenidoFiltro values ('application', 'even');
 insert into ContenidoFiltro values ('ITG', 'portal');
