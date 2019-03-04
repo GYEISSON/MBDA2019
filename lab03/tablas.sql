@@ -8,7 +8,7 @@ CREATE TABLE Perfil(
 
 CREATE TABLE Opinion(
     numero NUMBER(16) NOT NULL,
-    fecha VARCHAR2(20) NOT NULL,
+    fecha DATE NOT NULL,
     tipo VARCHAR2(32) NOT NULL,
     justificacion VARCHAR2(20),
     detalle VARCHAR2(20),
@@ -22,7 +22,7 @@ CREATE TABLE Adjetivo(
 );
 
 CREATE TABLE Consulta(
-    fecha VARCHAR2(20) NOT NULL,
+    fecha DATE NOT NULL,
     perfil VARCHAR2(50) NOT NULL, 
     contenido VARCHAR2(70) NOT NULL
 );
