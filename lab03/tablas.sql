@@ -1,15 +1,17 @@
 -- tablas 
 
+
+
 CREATE TABLE Perfil(
-    correo VARCHAR2(50) NOT NULL,
+    correo VARCHAR2(30) NOT NULL,
     nombre VARCHAR2(20) NOT NULL,
     bloqueado NUMBER(1) NOT NULL
 );
 
 CREATE TABLE Opinion(
-    numero NUMBER(3) NOT NULL,
+    numero NUMBER(5) NOT NULL,
     fecha DATE NOT NULL,
-    tipo VARCHAR2(20) NOT NULL,
+    tipo VARCHAR2(1) NOT NULL,
     justificacion VARCHAR2(20),
     detalle VARCHAR2(20),
     perfilc VARCHAR2(50) NOT NULL,
@@ -31,16 +33,16 @@ CREATE TABLE Consulta(
 CREATE TABLE Temporal(
     nombre VARCHAR2(20) NOT NULL,
     fecha DATE NOT NULL,
-    url VARCHAR2(300) NOT NULL,
-    tipo VARCHAR2(20) NOT NULL,
+    url VARCHAR2(50) NOT NULL,
+    tipo VARCHAR2(1) NOT NULL,
     perfil VARCHAR(50) NOT NULL,
-    duracion NUMBER(10) NOT NULL,
-    idioma VARCHAR(20) NOT NULL
+    duracion NUMBER(3) NOT NULL,
+    idioma VARCHAR(1) NOT NULL
 );
 
 CREATE TABLE Etiqueta(
     temporal VARCHAR2(20) NOT NULL,
-    nombre VARCHAR2(20) NOT NULL
+    nombre VARCHAR(10) NOT NULL
 );
 
 CREATE TABLE Tema(
@@ -51,7 +53,7 @@ CREATE TABLE Tema(
 
 CREATE TABLE Palabra(
     tema VARCHAR(50) NOT NULL,
-    nombre VARCHAR2(20) NOT NULL
+    nombre VARCHAR2(10) NOT NULL
 );
 
 CREATE TABLE EsPrerrequisito(
@@ -65,13 +67,13 @@ CREATE TABLE EsSubtema(
 );
 
 CREATE TABLE Asignatura(
-    sigla VARCHAR(5) NOT NULL,
-    nombre VARCHAR(15) NOT NULL
+    sigla VARCHAR2(3) NOT NULL,
+    nombre VARCHAR2(15) NOT NULL
 );
 
 CREATE TABLE Trata(
-    nivel VARCHAR(20) NOT NULL,
-    porcentaje NUMBER(5) NOT NULL,
+    nivel VARCHAR(1) NOT NULL,
+    porcentaje NUMBER(3) NOT NULL,
     tema VARCHAR2(50) NOT NULL,
     asignatura VARCHAR(6) NOT NULL
 );

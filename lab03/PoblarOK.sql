@@ -59,7 +59,7 @@ insert into temporal values ('intangible', TO_DATE('2001-01-21', 'YYYY-MM-DD'), 
 insert into temporal values ('real-time', TO_DATE('2002-01-21', 'YYYY-MM-DD'), 'https://tinyurl.com/i', 'audio','zbatteson8@patch.com', '8.34', 'espanol');
 insert into temporal values ('application', TO_DATE('2020-01-21', 'YYYY-MM-DD'), 'https://stanford.edu/morbi/', 'audio','jmccart9@mozilla.com', '5.52', 'chino');
 
-insert into etiqueta values ('incremental', 'Versatile');
+insert into etiqueta values ('incremental', 'VersatileS');
 insert into etiqueta values ('Secured', 'motivating');
 insert into etiqueta values ('static', 'maximized');
 insert into etiqueta values ('collaboration', 'Multi-layered');
