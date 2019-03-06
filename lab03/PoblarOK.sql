@@ -37,14 +37,14 @@ insert into adjetivo values (10, 'bifurcated');
 
 
 insert into consulta values (TO_DATE('2006-01-21', 'YYYY-MM-DD'), 'wkidston0@reddit.com', 'ipsum');
-insert into consulta values (TO_DATE('2010-01-21', 'mdaventry1@php.net', 'lacus');
+insert into consulta values (TO_DATE('2010-01-21', 'YYYY-MM-DD'), 'mdaventry1@php.net', 'lacus');
 insert into consulta values (TO_DATE('2015-01-21', 'YYYY-MM-DD'), 'cortas2@mtv.com', 'purus eu');
 insert into consulta values (TO_DATE('2015-01-21', 'YYYY-MM-DD'), 'ayashunin3@mediafire.com', 'volutpat eleifend');
 insert into consulta values (TO_DATE('2011-01-21', 'YYYY-MM-DD'), 'ajarmain4@yolasite.com', 'non mauris');
 insert into consulta values (TO_DATE('2010-01-21', 'YYYY-MM-DD'), 'mabreheart5@techcrunch.com', 'magna ac');
 insert into consulta values (TO_DATE('2003-01-21', 'YYYY-MM-DD'), 'sdagon6@youtu.be', 'curae');
 insert into consulta values (TO_DATE('2001-01-21', 'YYYY-MM-DD'), 'lgoater7@ucoz.com', 'pede posuere');
-insert into consulta values (TO_DATE('2002-01-21', 'YYYY-MM-DD'), 'zbatteson8@patch.com', 'phasellus in');
+insert into consulta values (TO_DATE('2002-01-21', 'YYYY-M -DD'), 'zbatteson8@patch.com', 'phasellus in');
 insert into consulta values (TO_DATE('2020-01-21', 'YYYY-MM-DD'), 'jmccart9@mozilla.com', 'metus');
 
 

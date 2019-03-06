@@ -1,0 +1,14 @@
+DELETE FROM Perfil;
+DELETE FROM Opinion;
+DELETE FROM Adjetivo;
+DELETE FROM Consulta;
+DELETE FROM Temporal;
+DELETE FROM Etiqueta;
+DELETE FROM Tema;
+DELETE FROM Palabra;
+DELETE FROM EsPrerrequisito;
+DELETE FROM EsSubtema;
+DELETE FROM Asignatura;
+DELETE FROM Trata;
+DELETE FROM Filtro;
+DELETE FROM ContenidoFiltro;
