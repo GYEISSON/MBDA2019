@@ -63,3 +63,4 @@ insert into perfil values ('yeison7f@gmail.com','andres',1);
 
 -- Se trata de ingresar una opinion con una justificacion luego intentar ingresar otra opinion con la misma justificacion
 -- no se permite ya que la justificacion debe ser unica 
+insert into Opinion values (123,TO_DATE('2006-01-21', 'YYYY-MM-DD'),'F','no aplica','momentos positivos','yeison7f@gmail.com',);
