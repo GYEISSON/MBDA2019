@@ -6,3 +6,6 @@ WHERE TEMA.NOMBRE = CONTENIDOTEMA.TEMA AND  TEMPORAL.NOMBRE = CONTENIDOTEMA.CONT
 GROUP BY TEMA.NOMBRE, TEMPORAL.URL,OPINION.NUMERO;
 
 --consultar los diez mas populares del mes 
+
+select perfil, nombre , url
+from temporal;
