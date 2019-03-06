@@ -1,12 +1,13 @@
--- tablas 
-
-
+-- tablas POR CRUD'S
+-- PERFILES 
 
 CREATE TABLE Perfil(
     correo VARCHAR2(30) NOT NULL,
     nombre VARCHAR2(20) NOT NULL,
     bloqueado NUMBER(1) NOT NULL
 );
+
+-- OPINIONES
 
 CREATE TABLE Opinion(
     numero NUMBER(5) NOT NULL,
@@ -17,11 +18,12 @@ CREATE TABLE Opinion(
     perfilc VARCHAR2(50) NOT NULL,
     contenidoid VARCHAR2(20) NOT NULL
 );
-
 CREATE TABLE Adjetivo(
     opinion NUMBER(3) NOT NULL,
     nombre VARCHAR(20) NOT NULL
 );
+
+-- CONSULTAS  
 
 CREATE TABLE Consulta(
     fecha DATE NOT NULL,
@@ -29,6 +31,7 @@ CREATE TABLE Consulta(
     contenido VARCHAR(20) NOT NULL
 );
 
+--CONTENIDOS 
 
 CREATE TABLE Temporal(
     nombre VARCHAR2(20) NOT NULL,
@@ -39,11 +42,12 @@ CREATE TABLE Temporal(
     duracion NUMBER(3) NOT NULL,
     idioma VARCHAR(1) NOT NULL
 );
-
 CREATE TABLE Etiqueta(
     temporal VARCHAR2(20) NOT NULL,
     nombre VARCHAR(10) NOT NULL
 );
+
+-- TEMAS 
 
 CREATE TABLE Tema(
     nombre VARCHAR(50) NOT NULL,
@@ -66,17 +70,19 @@ CREATE TABLE EsSubtema(
     nombreTemaB VARCHAR(50) NOT NULL
 );
 
+--ASIGNATURAS 
 CREATE TABLE Asignatura(
     sigla VARCHAR2(3) NOT NULL,
     nombre VARCHAR2(15) NOT NULL
 );
-
 CREATE TABLE Trata(
     nivel VARCHAR(1) NOT NULL,
     porcentaje NUMBER(3) NOT NULL,
     tema VARCHAR2(50) NOT NULL,
     asignatura VARCHAR(6) NOT NULL
 );
+
+--FILTROS 
 
 CREATE TABLE Filtro(
      nombre VARCHAR2(10) NOT NULL,
