@@ -12,8 +12,8 @@ CREATE TABLE Opinion(
     tipo VARCHAR2(20) NOT NULL,
     justificacion VARCHAR2(20),
     detalle VARCHAR2(20),
-    perfilc VARCHAR2(50),
-    contenidoid VARCHAR2(20)
+    perfilc VARCHAR2(50) NOT NULL,
+    contenidoid VARCHAR2(20) NOT NULL
 );
 
 CREATE TABLE Adjetivo(
