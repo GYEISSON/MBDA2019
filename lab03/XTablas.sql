@@ -12,3 +12,4 @@ DROP  TABLE Asignatura;
 DROP  TABLE Trata;
 DROP  TABLE Filtro;
 DROP  TABLE ContenidoFiltro;
+DROP TABLE ContenidoTema;

@@ -1,7 +1,8 @@
 
-insert into opinion values (1, TO_DATE('2006-01-21', 'YYYY-MM-DD'), 'me confunde', 'Ut tellus.', 'vivamus', 'wkidston0@reddit.com', 'Devolved');
-insert into opinion values (2, TO_DATE('2010-01-21', 'YYYY-MM-DD'), 'me encanta', 'Etiam justo.', 'felis', 'mdaventry1@php.net', 'collaboration');
-insert into opinion values (3, TO_DATE('2015-01-21', 'YYYY-MM-DD'), 'me encanta', 'Nulla nisl.', 'hac', 'cortas2@mtv.com', 'Operative');
+insert into opinion values (1, TO_DATE('2006-01-21', 'YYYY-MM-DD'), 'E', 'Ut tellus.', 'momentos de error', 'wkidston0@reddit.com', 'incremental');
+insert into opinion values (2, TO_DATE('2010-01-21', 'YYYY-MM-DD'), 'G', 'Etiam justo.', 'momentos de error', 'mdaventry1@php.net', 'static');
+insert into opinion values (3, TO_DATE('2015-01-21', 'YYYY-MM-DD'), 'C', 'Nulla nisl.', 'momentos de error', 'cortas2@mtv.com', 'Secured');
+
 insert into opinion values (4, TO_DATE('2011-01-21', 'YYYY-MM-DD'), 'me confunde', 'Sed ante.', 'nullam', 'ayashunin3@mediafire.com', 'logistical');
 insert into opinion values (5, TO_DATE('2010-01-21', 'YYYY-MM-DD'), 'me gusta', 'Mauris enim leo.', 'eget', 'ajarmain4@yolasite.com', 'project');
 insert into opinion values (6, TO_DATE('2003-01-21', 'YYYY-MM-DD'), 'me confunde', 'Morbi  justo.', 'scisque', 'mabreheart5@techcrunch.com', 'capability');
@@ -48,9 +49,11 @@ insert into consulta values (TO_DATE('2002-01-21', 'YYYY-M -DD'), 'zbatteson8@pa
 insert into consulta values (TO_DATE('2020-01-21', 'YYYY-MM-DD'), 'jmccart9@mozilla.com', 'metus');
 
 
-insert into temporal values ('incremental',TO_DATE('2006-01-21', 'YYYY-MM-DD'), 'https://macromedia.com/fermentum/justo/nec/condimentum.xml', 'audio','wkidston0@reddit.com', 3.55, 'chino');
-insert into temporal values ('Secured', TO_DATE('2010-01-21', 'YYYY-MM-DD'), 'https://cornell.edu/vestibulum/quam', 'video','mdaventry1@php.net', '8.46', 'frances');
-insert into temporal values ('static', TO_DATE('2015-01-21', 'YYYY-MM-DD'), 'http://bloglines.com/massa/tempor/convallis.jpg?nec=s', 'video','cortas2@mtv.com', '0.48', 'ingles');
+insert into temporal values ('incremental',TO_DATE('2006-01-21', 'YYYY-MM-DD'), 'https://macromedia.com.xml', 'A','wkidston0@reddit.com', 3, 'I');
+insert into temporal values ('Secured', TO_DATE('2010-01-21', 'YYYY-MM-DD'), 'https://cornell.edu/vestibulum.quam', 'V','mdaventry1@php.net', 46, 'F');
+insert into temporal values ('static', TO_DATE('2015-01-21', 'YYYY-MM-DD'), 'http://bloglines.com.s', 'F','cortas2@mtv.com', 48, 'I');
+
+
 insert into temporal values ('collaboration', TO_DATE('2015-01-21', 'YYYY-MM-DD'), 'https://intel.com/lobortis.jpg?in=nisi&tempus=nam&sit=ultrices', 'video','ayashunin3@mediafire.com', '1.72', 'chino');
 insert into temporal values ('Intuitive',TO_DATE('2011-01-21', 'YYYY-MM-DD'), 'https://webs.com/auctor/gravida/', 'video','ajarmain4@yolasite.com', '2.45', 'japones');
 insert into temporal values ('model', TO_DATE('2010-01-21', 'YYYY-MM-DD'), 'https://yolasite.com/tellus/semper.xml', 'audio','mabreheart5@techcrunch.com', '0.69', 'aleman');
@@ -58,6 +61,8 @@ insert into temporal values ('alliance', TO_DATE('2003-01-21', 'YYYY-MM-DD'), 'h
 insert into temporal values ('intangible', TO_DATE('2001-01-21', 'YYYY-MM-DD'), 'https://1und1.de/', 'video','lgoater7@ucoz.com', '2.27', 'aleman');
 insert into temporal values ('real-time', TO_DATE('2002-01-21', 'YYYY-MM-DD'), 'https://tinyurl.com/i', 'audio','zbatteson8@patch.com', '8.34', 'espanol');
 insert into temporal values ('application', TO_DATE('2020-01-21', 'YYYY-MM-DD'), 'https://stanford.edu/morbi/', 'audio','jmccart9@mozilla.com', '5.52', 'chino');
+
+
 
 insert into etiqueta values ('incremental', 'VersatileS');
 insert into etiqueta values ('Secured', 'motivating');
@@ -81,6 +86,13 @@ insert into tema values ('motivating', 'sdagon6@youtu.be');
 insert into tema values ('Devolved', 'lgoater7@ucoz.com');
 insert into tema values ('Fully-configurable', 'zbatteson8@patch.com');
 insert into tema values ('software', 'jmccart9@mozilla.com');
+
+
+
+INSERT INTO CONTENIDOTEMA VALUES('incremental','Customizable');
+INSERT INTO CONTENIDOTEMA VALUES('Secured','Robust');
+INSERT INTO CONTENIDOTEMA VALUES('static','hybrid');
+
 
 insert into palabra values ('Customizable', 'in magna');
 insert into palabra values ('solution-oriented', 'nam ultrices');
