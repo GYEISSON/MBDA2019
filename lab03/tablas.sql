@@ -47,6 +47,12 @@ CREATE TABLE Etiqueta(
     nombre VARCHAR(10) NOT NULL
 );
 
+
+CREATE TABLE ContenidoTema(
+     contenido VARCHAR2(20) NOT NULL,
+     tema VARCHAR2(50) NOT NULL
+);
+
 -- TEMAS 
 
 CREATE TABLE Tema(

@@ -63,4 +63,17 @@ insert into perfil values ('yeison7f@gmail.com','andres',1);
 
 -- Se trata de ingresar una opinion con una justificacion luego intentar ingresar otra opinion con la misma justificacion
 -- no se permite ya que la justificacion debe ser unica 
-insert into Opinion values (123,TO_DATE('2006-01-21', 'YYYY-MM-DD'),'F','no aplica','momentos positivos','yeison7f@gmail.com',);
+insert into temporal values ('incremental',TO_DATE('2006-01-21', 'YYYY-MM-DD'), 'https:///nec.c/condimentum.xml', 'A','yeison7f@gmail.com', 3, 'I');  
+insert into Opinion values (123,TO_DATE('2006-01-21', 'YYYY-MM-DD'),'E','no aplica','momentos positivos','yeison7f@gmail.com','incremental');
+insert into Opinion values (124,TO_DATE('2006-01-21', 'YYYY-MM-DD'),'C','no aplica','momentos negativos','yeison7f@gmail.com','incremental');
+--RESYTRICCOIN DE UNICA 
+
+--se trata de ingresaren en  la tabla asignatura un valor de sigla con un caracter especial
+--no se permitira ya que la sigla tiene una restriccion de atributo 
+insert into Asignatura values ('E#N','naturaleza');
+--RESTRICCION DE ATRIBUTO
+
+-- se trata de insertar en la tabla asignatura un valor de nombre nulo
+-- no se debe permitir porque al momento de crear las tablas se especifico que el valor no puede ser nulo
+insert into Asignatura values ('123',NULL);
+-- RESTRICCION DE ATRIBUTO
