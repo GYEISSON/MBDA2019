@@ -12,3 +12,4 @@ DELETE FROM Asignatura;
 DELETE FROM Trata;
 DELETE FROM Filtro;
 DELETE FROM ContenidoFiltro;
+DELETE FROM ContenidoTema;
