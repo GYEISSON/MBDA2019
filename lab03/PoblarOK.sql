@@ -37,17 +37,6 @@ insert into adjetivo values (9, 'fresh-think');
 insert into adjetivo values (10, 'bifurcated');
 
 
-insert into consulta values (TO_DATE('2006-01-21', 'YYYY-MM-DD'), 'wkidston0@reddit.com', 'ipsum');
-insert into consulta values (TO_DATE('2010-01-21', 'YYYY-MM-DD'), 'mdaventry1@php.net', 'lacus');
-insert into consulta values (TO_DATE('2015-01-21', 'YYYY-MM-DD'), 'cortas2@mtv.com', 'purus eu');
-insert into consulta values (TO_DATE('2015-01-21', 'YYYY-MM-DD'), 'ayashunin3@mediafire.com', 'volutpat eleifend');
-insert into consulta values (TO_DATE('2011-01-21', 'YYYY-MM-DD'), 'ajarmain4@yolasite.com', 'non mauris');
-insert into consulta values (TO_DATE('2010-01-21', 'YYYY-MM-DD'), 'mabreheart5@techcrunch.com', 'magna ac');
-insert into consulta values (TO_DATE('2003-01-21', 'YYYY-MM-DD'), 'sdagon6@youtu.be', 'curae');
-insert into consulta values (TO_DATE('2001-01-21', 'YYYY-MM-DD'), 'lgoater7@ucoz.com', 'pede posuere');
-insert into consulta values (TO_DATE('2002-01-21', 'YYYY-M -DD'), 'zbatteson8@patch.com', 'phasellus in');
-insert into consulta values (TO_DATE('2020-01-21', 'YYYY-MM-DD'), 'jmccart9@mozilla.com', 'metus');
-
 
 insert into temporal values ('incremental',TO_DATE('2006-01-21', 'YYYY-MM-DD'), 'https://macromedia.com.xml', 'A','wkidston0@reddit.com', 3, 'I');
 insert into temporal values ('Secured', TO_DATE('2010-01-21', 'YYYY-MM-DD'), 'https://cornell.edu/vestibulum.quam', 'V','mdaventry1@php.net', 46, 'F');
@@ -62,6 +51,18 @@ insert into temporal values ('intangible', TO_DATE('2001-01-21', 'YYYY-MM-DD'), 
 insert into temporal values ('real-time', TO_DATE('2002-01-21', 'YYYY-MM-DD'), 'https://tinyurl.com/i', 'audio','zbatteson8@patch.com', '8.34', 'espanol');
 insert into temporal values ('application', TO_DATE('2020-01-21', 'YYYY-MM-DD'), 'https://stanford.edu/morbi/', 'audio','jmccart9@mozilla.com', '5.52', 'chino');
 
+
+insert into consulta values (TO_DATE('2006-03-21', 'YYYY-MM-DD'), 'wkidston0@reddit.com', 'incremental');
+insert into consulta values (TO_DATE('2010-03-21', 'YYYY-MM-DD'), 'mdaventry1@php.net', 'Secured');
+insert into consulta values (TO_DATE('2015-03-21', 'YYYY-MM-DD'), 'cortas2@mtv.com', 'static');
+
+insert into consulta values (TO_DATE('2015-01-21', 'YYYY-MM-DD'), 'ayashunin3@mediafire.com', 'volutpat eleifend');
+insert into consulta values (TO_DATE('2011-01-21', 'YYYY-MM-DD'), 'ajarmain4@yolasite.com', 'non mauris');
+insert into consulta values (TO_DATE('2010-01-21', 'YYYY-MM-DD'), 'mabreheart5@techcrunch.com', 'magna ac');
+insert into consulta values (TO_DATE('2003-01-21', 'YYYY-MM-DD'), 'sdagon6@youtu.be', 'curae');
+insert into consulta values (TO_DATE('2001-01-21', 'YYYY-MM-DD'), 'lgoater7@ucoz.com', 'pede posuere');
+insert into consulta values (TO_DATE('2002-01-21', 'YYYY-M -DD'), 'zbatteson8@patch.com', 'phasellus in');
+insert into consulta values (TO_DATE('2020-01-21', 'YYYY-MM-DD'), 'jmccart9@mozilla.com', 'metus');
 
 
 insert into etiqueta values ('incremental', 'VersatileS');

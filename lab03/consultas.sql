@@ -7,5 +7,14 @@ GROUP BY TEMA.NOMBRE, TEMPORAL.URL,OPINION.NUMERO;
 
 --consultar los diez mas populares del mes 
 
-select perfil, nombre , url
-from temporal;
+select temporal.perfil as Perfil, temporal.nombre  as Titulo, temporal.url as URL
+from temporal,consulta
+where temporal.nombre = consulta.contenido and SUBSTR(TO_CHAR(consulta.fecha,'YYYY-MM-DD'),6,2) =SUBSTR(TO_CHAR(SYSDATE,'YYYY-MM-DD'),6,2)
+ORDER BY TEMPORAL.NOMBRE;
+
+--CONSULTAR LOS CONTENIDOS DE UN TEMA 
+SELECT tema.nombre as Titulo ,count(opinion.tipo) as Numero_Opiniones
+from TEMA ,TEMPORAL,CONTENIDOTEMA,OPINION
+WHERE TEMA.NOMBRE = CONTENIDOTEMA.TEMA AND  TEMPORAL.NOMBRE = CONTENIDOTEMA.CONTENIDO AND TEMPORAL.NOMBRE = OPINION.CONTENIDOID AND opinion.tipo in ('E','G')
+group by TEMA
+order by count(opinion.tipo);
