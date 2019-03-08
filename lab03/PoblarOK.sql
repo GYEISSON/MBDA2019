@@ -67,7 +67,8 @@ INSERT INTO TEMPORAL VALUES ('alliance', TO_DATE('2003-01-21', 'YYYY-MM-DD'), 'h
 INSERT INTO TEMPORAL VALUES ('intangible', TO_DATE('2001-01-21', 'YYYY-MM-DD'), 'https://1und1.de.', 'V','lgoater7@ucoz.com', '2.27', 'I');
 INSERT INTO TEMPORAL VALUES ('real-time', TO_DATE('2002-01-21', 'YYYY-MM-DD'), 'https://tinyurl.com.i', 'A','zbatteson8@patch.com', '8.34', 'E');
 INSERT INTO TEMPORAL VALUES ('application', TO_DATE('2020-01-21', 'YYYY-MM-DD'), 'https://stanford.edu.morbi/', 'A','jmccart9@mozilla.com', '5.52', 'F');
-
+INSERT INTO TEMPORAL VALUES ('NEWIA', TO_DATE('2020-01-21', 'YYYY-MM-DD'), 'https://stan.edu.morbi/', 'A','jmccart9@mozilla.com', '5.52', 'F');
+INSERT INTO TEMPORAL VALUES ('DSFGHJK', TO_DATE('2020-01-21', 'YYYY-MM-DD'), 'https://stan.eduS.morbi/', 'A','jmccart9@mozilla.com', '5.52', 'F');
 
 INSERT INTO ETIQUETA VALUES ('incremental', 'VersatileS');
 INSERT INTO ETIQUETA VALUES ('Secured', 'motivating');
