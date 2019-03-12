@@ -19,5 +19,5 @@ ALTER TABLE VENDEDOR ADD CONSTRAINT CK_VENDEDOR_TCorreo
 CHECK ( email like ('%@%') and email not like ('@%') 
         and email not like ('%@') and email not like ('%@%@%'));
 
-ALTER TABLE VALORACION ADD CONSTRAINT CK_VALORACION_TESTADO
-CHECK (nivel in ('US', 'CO', 'VE', 'PN', 'BR', 'MX'));
+ALTER TABLE UBICACION ADD CONSTRAINT CK_VALORACION_TPAIS
+CHECK (pais in ('US', 'CO', 'VE', 'PN', 'BR', 'MX'));
