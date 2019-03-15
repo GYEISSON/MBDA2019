@@ -1,3 +1,99 @@
+-- tablas POR CRUD'S
+-- PERFILES 
+
+CREATE TABLE Perfil(
+    correo VARCHAR2(30) NOT NULL,
+    nombre VARCHAR2(20) NOT NULL,
+    bloqueado NUMBER(1) NOT NULL
+);
+
+CREATE TABLE Opinion(
+    numero NUMBER(5) NOT NULL,
+    fecha DATE NOT NULL,
+    tipo VARCHAR2(1) NOT NULL,
+    justificacion VARCHAR2(20),
+    detalle VARCHAR2(20),
+    perfilc VARCHAR2(50) NOT NULL,
+    contenidoid VARCHAR2(20) NOT NULL
+);
+
+CREATE TABLE Adjetivo(
+    opinion NUMBER(5) NOT NULL,
+    nombre VARCHAR(10) NOT NULL
+);
+
+CREATE TABLE Tema(
+    nombre VARCHAR(50) NOT NULL,
+    perfil VARCHAR(50) NOT NULL
+);
+
+CREATE TABLE Palabra(
+    tema VARCHAR(50) NOT NULL,
+    nombre VARCHAR2(10) NOT NULL
+);
+
+CREATE TABLE EsPrerrequisito(
+    nombreTemaA VARCHAR(50) NOT NULL,
+    nombreTemaB VARCHAR(50) NOT NULL
+);
+
+CREATE TABLE EsSubtema(
+    nombreTemaA VARCHAR(50) NOT NULL,
+    nombreTemaB VARCHAR(50) NOT NULL
+);
+
+CREATE TABLE Temporal(
+    nombre VARCHAR2(20) NOT NULL,
+    fecha DATE NOT NULL,
+    url VARCHAR2(50) NOT NULL,
+    tipo VARCHAR2(1) NOT NULL,
+    perfil VARCHAR(50) NOT NULL,
+    duracion NUMBER(3) NOT NULL,
+    idioma VARCHAR(1) NOT NULL
+);
+
+CREATE TABLE Etiqueta(
+    temporal VARCHAR2(20) NOT NULL,
+    nombre VARCHAR(10) NOT NULL
+);
+
+CREATE TABLE ContenidoTema(
+     contenido VARCHAR2(20) NOT NULL,
+     tema VARCHAR2(50) NOT NULL
+);
+
+CREATE TABLE Consulta(
+    fecha DATE NOT NULL,
+    perfil VARCHAR2(50) NOT NULL, 
+    contenido VARCHAR(20) NOT NULL
+);
+
+CREATE TABLE Asignatura(
+    sigla VARCHAR2(3) NOT NULL,
+    nombre VARCHAR2(15) NOT NULL
+);
+
+CREATE TABLE Trata(
+    nivel VARCHAR(1) NOT NULL,
+    porcentaje NUMBER(3) NOT NULL,
+    tema VARCHAR2(50) NOT NULL,
+    asignatura VARCHAR(6) NOT NULL
+);
+
+CREATE TABLE Filtro(
+     nombre VARCHAR2(10) NOT NULL,
+     descripcion VARCHAR2(50) NOT NULL  
+);
+
+CREATE TABLE ContenidoFiltro(
+    contenido VARCHAR2(20) NOT NULL,
+    filtro VARCHAR(10) NOT NULL
+);
+
+
+
+
+
 --atributos 
 ALTER TABLE Opinion ADD CONSTRAINT CK_OPINION_TCONSECUTIVO 
 CHECK (numero >0 and numero <=99999);
@@ -159,3 +255,55 @@ REFERENCES Tema(nombre);
 
 
 
+
+--TRIGGERS
+
+
+CREATE OR REPLACE TRIGGER AUTO_OPINION 
+    BEFORE INSERT ON OPINION
+    FOR EACH ROW
+DECLARE 
+    NUM NUMBER;
+    FECHA DATE;
+BEGIN
+    NUM:=0;
+    SELECT COUNT(*) INTO NUM FROM OPINION;
+    FECHA:= TO_DATE(SYSDATE, 'YYYY-MM-DD');
+    :new.NUMERO:=NUM;
+    :new.FECHA:=FECHA;
+    
+    SELECT BLOQUEADO INTO NUM FROM TEMPORAL JOIN PERFIL ON (PERFIL.CORREO = TEMPORAL.PERFIL) WHERE TEMPORAL.NOMBRE = :NEW.CONTENIDOID;
+    IF (NUM) = 1 
+    THEN RAISE_APPLICATION_ERROR(-20005, 'PERFIL BLOQUEADO');
+    END IF;  
+END;
+/
+
+CREATE OR REPLACE TRIGGER FECHA_OPINION 
+    BEFORE INSERT ON OPINION
+    FOR EACH ROW
+DECLARE
+    NUM NUMBER;
+    FECHAA DATE;
+BEGIN
+    SELECT FECHA INTO FECHAA FROM CONSULTA JOIN PERFIL ON CONSULTA.PERFIL=PERFIL.CORREO;
+    
+    
+END;
+/
+
+
+
+
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
