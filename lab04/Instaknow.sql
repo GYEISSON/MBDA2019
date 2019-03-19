@@ -253,7 +253,85 @@ REFERENCES Temporal(nombre);
 ALTER TABLE ContenidoTema ADD CONSTRAINT FK_ContenidoTema_Tema FOREIGN KEY (tema)
 REFERENCES Tema(nombre);
 
+--TRIGGERS REGISTRAR OPINION
+/*
+El número y la fecha se asigna automáticamente
+No se pueden dar opiniones sobre los contenidos bloqueados.
+*/
 
+CREATE OR REPLACE TRIGGER AUTO_OPINION 
+    BEFORE INSERT ON OPINION
+    FOR EACH ROW
+DECLARE 
+    NUM NUMBER;
+    FECHA DATE;
+BEGIN
+    NUM:=0;
+    SELECT COUNT(*)+1 INTO NUM FROM OPINION;
+    FECHA:= TO_DATE(SYSDATE, 'YYYY-MM-DD');
+    :new.NUMERO:=NUM;
+    :new.FECHA:=FECHA;
+    num :=0;
+    SELECT BLOQUEADO INTO NUM FROM TEMPORAL JOIN PERFIL ON (PERFIL.CORREO = TEMPORAL.PERFIL) WHERE TEMPORAL.NOMBRE = :NEW.CONTENIDOID;
+    IF (NUM) = 1 THEN RAISE_APPLICATION_ERROR(-20005, 'PERFIL BLOQUEADO');
+    END IF;  
+END;
+/
+
+--Los perfiles que dan la opinión deben haber visto el contenido en los ocho días anteriores.
+
+CREATE OR REPLACE TRIGGER FECHA_OPINION 
+    BEFORE INSERT ON OPINION
+    FOR EACH ROW
+DECLARE
+    P1 VARCHAR2(30); P2 VARCHAR2(30); FECHAA DATE;
+BEGIN
+    SELECT FECHA INTO FECHAA FROM Consulta WHERE PERFIL = :NEW.PERFILC;
+    SELECT PERFIL INTO P1 FROM TEMPORAL WHERE nombre =  :new.contenidoid;
+    p2 := :new.PERFILC;
+    IF (P1!=P2) AND ((SYSDATE-8)>=FECHAA) THEN 
+        raise_application_error(-20015,'el perfil no ha visto el contenido en 8' );
+    END IF;
+END FECHA_OPINION;
+/
+--prueba de trgigger anterior
+INSERT INTO PERFIL VALUES ('wkidston0@reddit.com', 'Chet Louisot', 0);  
+INSERT INTO PERFIL VALUES ('mdaventry1@php.net', 'Katha Corteney', 0);
+INSERT INTO TEMPORAL VALUES ('incremental',TO_DATE('2006-01-21', 'YYYY-MM-DD'), 'https://macromedia.com.xml', 'A','wkidston0@reddit.com', 3, 'I');
+insert into consulta values(TO_DATE('2019-03-15', 'YYYY-MM-DD'),'mdaventry1@php.net','incremental');
+INSERT INTO OPINION(tipo,justificacion,detalle,perfilc,contenidoid) VALUES('E', 'Ut tellus.', 'momentos de error', 'mdaventry1@php.net', 'incremental');
+
+--Los contenidos no pueden valorarse más de una vez por el mismo perfil.
+
+
+/*
+COMO Perfil
+QUIERO adicionar mi opinión
+PARA PODER colaborar con la calidad de Instaknow
+-
+Adición
+El número y la fecha se asigna automáticamente
+No se pueden dar opiniones sobre los contenidos bloqueados.
+
+Los perfiles que dan la opinión deben haber visto el contenido en los ocho días anteriores.
+
+Los contenidos no pueden valorarse más de una vez por el mismo perfil.
+El perfil que publicó no puede valorar su propio contenido.
+Los adjetivos no se pueden repetir.
+Se deben adicionar automáticamente los siguientes adjetivos dependiendo del tipo de  opinión: encantador para me encanta, interesante para me gusta, confuso para me confunde e inapropiado para me enoja.
+
+Modificación
+El único dato a modificar es el detalle, si no se ingresó al momento de adición.
+
+Eliminación
+Sólo es posible eliminar la opinión si es la última registrada.
+
+
+*/
+    
+
+
+--poblar sin triggers-----------------------------------------------------------------------------------------------------------
 
 INSERT INTO PERFIL VALUES ('wkidston0@reddit.com', 'Chet Louisot', 1);
 INSERT INTO PERFIL VALUES ('mdaventry1@php.net', 'Katha Corteney', 0);
@@ -440,13 +518,6 @@ INSERT INTO CONTENIDOFILTRO VALUES ('collaboration', 'suspense');
 
 
 
-
-
-
-
-
-
-
 --eliminar atributos 
 ALTER TABLE Opinion DROP CONSTRAINT CK_OPINION_TCONSECUTIVO;
 ALTER TABLE Perfil DROP CONSTRAINT CK_PERFIL_TCorreo;
@@ -463,7 +534,7 @@ ALTER TABLE Asignatura DROP CONSTRAINT CK_ASIGNATURA_TSIGLA;
 ALTER TABLE Temporal DROP CONSTRAINT CK_TEMPORAL_TTIPO;
 ALTER TABLE Temporal DROP CONSTRAINT CK_TEMPORAL_TURL;
 
-
+--eliminar restriciones declarativas--------------------------------------------------------------------------------------------
 --eliminar unicas
 ALTER TABLE Temporal DROP CONSTRAINT UK_TEMPORAL;
 ALTER TABLE Opinion DROP CONSTRAINT UK_OPINION;
@@ -511,73 +582,24 @@ ALTER TABLE Filtro DROP CONSTRAINT PK_FILTRO;
 ALTER TABLE ContenidoTema DROP CONSTRAINT PK_CONTENIDO_TEMA; 
 ALTER TABLE Consulta DROP CONSTRAINT PK_PERFIL_CONTENIDO;
 
+--eliminar tablas
 
 
-
-
-
-
-
-
-
-
-
-
-
-
---TRIGGERS REGISTRAR OPINION
-
-CREATE OR REPLACE TRIGGER AUTO_OPINION 
-    BEFORE INSERT ON OPINION
-    FOR EACH ROW
-DECLARE 
-    NUM NUMBER;
-    FECHA DATE;
-BEGIN
-    NUM:=0;
-    SELECT COUNT(*)+1 INTO NUM FROM OPINION;
-    FECHA:= TO_DATE(SYSDATE, 'YYYY-MM-DD');
-    :new.NUMERO:=NUM;
-    :new.FECHA:=FECHA;
-    num :=0;
-    SELECT BLOQUEADO INTO NUM FROM TEMPORAL JOIN PERFIL ON (PERFIL.CORREO = TEMPORAL.PERFIL) WHERE TEMPORAL.NOMBRE = :NEW.CONTENIDOID;
-    IF (NUM) = 1 THEN RAISE_APPLICATION_ERROR(-20005, 'PERFIL BLOQUEADO');
-    END IF;  
-END;
-/
-
-CREATE OR REPLACE TRIGGER FECHA_OPINION 
-    BEFORE INSERT ON OPINION
-    FOR EACH ROW
-DECLARE
-    P1 VARCHAR2(30); P2 VARCHAR2(30); FECHAA DATE;
-BEGIN
-    SELECT FECHA INTO FECHAA FROM Consulta WHERE PERFIL = :NEW.PERFILC;
-    SELECT PERFIL INTO P1 FROM TEMPORAL WHERE nombre =  :new.contenidoid;
-    p2 := :new.PERFILC;
-    IF (P1!=P2) AND ((SYSDATE-8)>=FECHAA) THEN 
-        raise_application_error(-20015,'el perfil no ha visto el contenido en 8' );
-    END IF;
-END FECHA_OPINION;
-/
-INSERT INTO PERFIL VALUES ('wkidston0@reddit.com', 'Chet Louisot', 0);  
-INSERT INTO PERFIL VALUES ('mdaventry1@php.net', 'Katha Corteney', 0);
-INSERT INTO TEMPORAL VALUES ('incremental',TO_DATE('2006-01-21', 'YYYY-MM-DD'), 'https://macromedia.com.xml', 'A','wkidston0@reddit.com', 3, 'I');
-insert into consulta values(TO_DATE('2019-03-15', 'YYYY-MM-DD'),'mdaventry1@php.net','incremental');
-INSERT INTO OPINION(tipo,justificacion,detalle,perfilc,contenidoid) VALUES('E', 'Ut tellus.', 'momentos de error', 'mdaventry1@php.net', 'incremental');
-
-delete from consulta;
-delete from opinion;
-delete from temporal;
-delete from perfil;
-
-    
-
-    
-    
-    
-    
-    
+DROP  TABLE Adjetivo;
+DROP  TABLE Consulta;
+DROP  TABLE Temporal;
+DROP  TABLE Etiqueta;
+DROP  TABLE Tema;
+DROP  TABLE Palabra;
+DROP  TABLE EsPrerrequisito;
+DROP  TABLE EsSubtema;
+DROP  TABLE Asignatura;
+DROP  TABLE Trata;
+DROP  TABLE Filtro;
+DROP  TABLE ContenidoFiltro;
+DROP TABLE ContenidoTema;
+DROP  TABLE Opinion;    
+DROP  TABLE Perfil;    
     
     
     
