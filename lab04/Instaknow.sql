@@ -47,7 +47,7 @@ CREATE TABLE Temporal(
     fecha DATE NOT NULL,
     url VARCHAR2(50) NOT NULL,
     tipo VARCHAR2(1) NOT NULL,
-    perfil VARCHAR(50) NOT NULL,
+    perfil VARCHAR(30) NOT NULL,
     duracion NUMBER(3) NOT NULL,
     idioma VARCHAR(1) NOT NULL
 );
@@ -525,8 +525,7 @@ ALTER TABLE Consulta DROP CONSTRAINT PK_PERFIL_CONTENIDO;
 
 
 
---TRIGGERS
-
+--TRIGGERS REGISTRAR OPINION
 
 CREATE OR REPLACE TRIGGER AUTO_OPINION 
     BEFORE INSERT ON OPINION
@@ -536,14 +535,13 @@ DECLARE
     FECHA DATE;
 BEGIN
     NUM:=0;
-    SELECT COUNT(*) INTO NUM FROM OPINION;
+    SELECT COUNT(*)+1 INTO NUM FROM OPINION;
     FECHA:= TO_DATE(SYSDATE, 'YYYY-MM-DD');
     :new.NUMERO:=NUM;
     :new.FECHA:=FECHA;
-    
+    num :=0;
     SELECT BLOQUEADO INTO NUM FROM TEMPORAL JOIN PERFIL ON (PERFIL.CORREO = TEMPORAL.PERFIL) WHERE TEMPORAL.NOMBRE = :NEW.CONTENIDOID;
-    IF (NUM) = 1 
-    THEN RAISE_APPLICATION_ERROR(-20005, 'PERFIL BLOQUEADO');
+    IF (NUM) = 1 THEN RAISE_APPLICATION_ERROR(-20005, 'PERFIL BLOQUEADO');
     END IF;  
 END;
 /
@@ -552,31 +550,26 @@ CREATE OR REPLACE TRIGGER FECHA_OPINION
     BEFORE INSERT ON OPINION
     FOR EACH ROW
 DECLARE
-    P1 VARCHAR2(20);
-    P2 VARCHAR2(20);
-    FECHAA DATE;
+    P1 VARCHAR2(30); P2 VARCHAR2(30); FECHAA DATE;
 BEGIN
-    SELECT FECHA INTO FECHAA FROM TEMPORAL WHERE PERFIL = :NEW.PERFILC;
-    SELECT PERFIL INTO P1 FROM TEMPORAL WHERE PERFIL = :NEW.PERFILC;
-    SELECT PERFILC INTO P2 FROM OPINION WHERE PERFILC = :NEW.PERFILC;
+    SELECT FECHA INTO FECHAA FROM Consulta WHERE PERFIL = :NEW.PERFILC;
+    SELECT PERFIL INTO P1 FROM TEMPORAL WHERE nombre =  :new.contenidoid;
+    p2 := :new.PERFILC;
     IF (P1!=P2) AND ((SYSDATE-8)>=FECHAA) THEN 
-        raise_application_error(-20015,'perfil ve el contenido 8 dias despues' );
+        raise_application_error(-20015,'el perfil no ha visto el contenido en 8' );
     END IF;
-END;
+END FECHA_OPINION;
 /
+INSERT INTO PERFIL VALUES ('wkidston0@reddit.com', 'Chet Louisot', 0);  
+INSERT INTO PERFIL VALUES ('mdaventry1@php.net', 'Katha Corteney', 0);
+INSERT INTO TEMPORAL VALUES ('incremental',TO_DATE('2006-01-21', 'YYYY-MM-DD'), 'https://macromedia.com.xml', 'A','wkidston0@reddit.com', 3, 'I');
+insert into consulta values(TO_DATE('2019-03-15', 'YYYY-MM-DD'),'mdaventry1@php.net','incremental');
+INSERT INTO OPINION(tipo,justificacion,detalle,perfilc,contenidoid) VALUES('E', 'Ut tellus.', 'momentos de error', 'mdaventry1@php.net', 'incremental');
 
-INSERT INTO OPINION SELECT NUMERO+1, FECHA, TIPO,JUSTIFICACION,DETALLE,PERFILC,CONTENIDOID FROM OPINION;
-INSERT INTO OPINION VALUES (2,TO_DATE('2019-03-17','YYYY-MM-DD'),'G','Etiam justo.','momentos de error','mdaventry1@php.net', 'static');
-
-
-DELETE FROM Perfil;
-DELETE FROM Opinion;
-DELETE FROM Adjetivo;
-
-drop trigger FECHA_OPINION;
-
-
-
+delete from consulta;
+delete from opinion;
+delete from temporal;
+delete from perfil;
 
     
 
