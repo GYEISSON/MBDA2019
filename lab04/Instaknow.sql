@@ -19,7 +19,7 @@ CREATE TABLE Opinion(
 
 CREATE TABLE Adjetivo(
     opinion NUMBER(5) NOT NULL,
-    nombre VARCHAR(10) NOT NULL
+    nombre VARCHAR(20) NOT NULL
 );
 
 CREATE TABLE Tema(
@@ -259,14 +259,14 @@ El número y la fecha se asigna automáticamente
 No se pueden dar opiniones sobre los contenidos bloqueados.
 */
 
-CREATE OR REPLACE TRIGGER AUTO_OPINION 
+CREATE OR REPLACE TRIGGER AUTO_OPINION_BLOQUEADO
     BEFORE INSERT ON OPINION
     FOR EACH ROW
 DECLARE 
     NUM NUMBER;
     FECHA DATE;
 BEGIN
-    NUM:=0;
+    NUM:=1;
     SELECT COUNT(*)+1 INTO NUM FROM OPINION;
     FECHA:= TO_DATE(SYSDATE, 'YYYY-MM-DD');
     :new.NUMERO:=NUM;
@@ -277,48 +277,78 @@ BEGIN
     END IF;  
 END;
 /
-
---Los perfiles que dan la opinión deben haber visto el contenido en los ocho días anteriores.
-
-CREATE OR REPLACE TRIGGER FECHA_OPINION 
+/*
+--Los perfiles que dan la opinión deben haber visto el contenido en los ocho días anteriores
+-- El perfil que publicó no puede valorar su propio contenido.
+*/
+CREATE OR REPLACE TRIGGER FECHA_OPINION_PERFIL 
     BEFORE INSERT ON OPINION
     FOR EACH ROW
 DECLARE
-    P1 VARCHAR2(30); P2 VARCHAR2(30); FECHAA DATE;
+    PERFIL_PUBLICO_CONTENIDO VARCHAR2(30); 
+    PERFIL_OPINA VARCHAR2(30);
+    FECHA_DE_CONSULTA DATE;
 BEGIN
-    SELECT FECHA INTO FECHAA FROM Consulta WHERE PERFIL = :NEW.PERFILC;
-    SELECT PERFIL INTO P1 FROM TEMPORAL WHERE nombre =  :new.contenidoid;
-    p2 := :new.PERFILC;
-    IF (P1!=P2) AND ((SYSDATE-8)>=FECHAA) THEN 
-        raise_application_error(-20015,'el perfil no ha visto el contenido en 8' );
+    PERFIL_OPINA := :NEW.PERFILC;
+    SELECT FECHA INTO FECHA_DE_CONSULTA FROM Consulta WHERE PERFIL = PERFIL_OPINA;
+    SELECT PERFIL INTO PERFIL_PUBLICO_CONTENIDO FROM TEMPORAL WHERE nombre =  :new.contenidoid;
+
+    IF( (SYSDATE-8) > FECHA_DE_CONSULTA ) THEN 
+        raise_application_error(-20015,'El perfil no ha visto el contenido en los 8 dias anteriores.' );
     END IF;
-END FECHA_OPINION;
+
+    IF( PERFIL_PUBLICO_CONTENIDO = PERFIL_OPINA ) THEN 
+        RAISE_APPLICATION_ERROR(-20098,'El perfil que publico el contenido no puede dar opinion acerca del contenido.');
+    END IF;
+
+END FECHA_OPINION_PERFIL;
 /
---prueba de trgigger anterior
+--prueba de trigger anterior
 INSERT INTO PERFIL VALUES ('wkidston0@reddit.com', 'Chet Louisot', 0);  
 INSERT INTO PERFIL VALUES ('mdaventry1@php.net', 'Katha Corteney', 0);
 INSERT INTO TEMPORAL VALUES ('incremental',TO_DATE('2006-01-21', 'YYYY-MM-DD'), 'https://macromedia.com.xml', 'A','wkidston0@reddit.com', 3, 'I');
 insert into consulta values(TO_DATE('2019-03-15', 'YYYY-MM-DD'),'mdaventry1@php.net','incremental');
 INSERT INTO OPINION(tipo,justificacion,detalle,perfilc,contenidoid) VALUES('E', 'Ut tellus.', 'momentos de error', 'mdaventry1@php.net', 'incremental');
 
+/*
+Se deben adicionar automáticamente los siguientes adjetivos
+dependiendo del tipo de  opinión: encantador para me encanta,
+interesante para me gusta,
+confuso para me confunde e
+inapropiado para me enoja.
+
+*/
+CREATE OR REPLACE TRIGGER AUTO_ADJETIVOS
+    BEFORE AFTER INSERT INTO OPINION
+    FOR EACH ROW
+DECLARE 
+BEGIN
+    IF(:OLD.TIPO = 'E') THEN
+        INSERT INTO ADJETIVO VALUES(:OLD.NUMERO,'Encantador');
+    ELSE IF (:OLD.TIPO = 'G') THEN 
+        INSERT INTO ADJETIVO VALUES(:OLD.NUMERO,'Interesante');
+    ELSE IF (:OLD.TIPO = 'E') THEN 
+        INSERT INTO ADJETIVO VALUES(:OLD.NUMERO,'Confuso');
+    ELSE  
+        INSERT INTO ADJETIVO VALUES(:OLD.NUMERO,'inapropiado');
+    END IF;     
+END AUTO_ADJETIVOS;
+/
+
 --Los contenidos no pueden valorarse más de una vez por el mismo perfil.
+ALTER TABLE OPINION ADD CONSTRAINT UK_OPINION_PERFIL_CONTENIDO UNIQUE (perfilc,contenidoid);
+
+--Los adjetivos no se pueden repetir.
+ALTER TABLE ADJETIVO ADD CONSTRAINT UK_ADJETIVO_NOMBRE UNIQUE (NOMBRE);
+
 
 
 /*
 COMO Perfil
 QUIERO adicionar mi opinión
 PARA PODER colaborar con la calidad de Instaknow
--
+-   
 Adición
-El número y la fecha se asigna automáticamente
-No se pueden dar opiniones sobre los contenidos bloqueados.
-
-Los perfiles que dan la opinión deben haber visto el contenido en los ocho días anteriores.
-
-Los contenidos no pueden valorarse más de una vez por el mismo perfil.
-El perfil que publicó no puede valorar su propio contenido.
-Los adjetivos no se pueden repetir.
-Se deben adicionar automáticamente los siguientes adjetivos dependiendo del tipo de  opinión: encantador para me encanta, interesante para me gusta, confuso para me confunde e inapropiado para me enoja.
 
 Modificación
 El único dato a modificar es el detalle, si no se ingresó al momento de adición.
