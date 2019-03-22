@@ -355,10 +355,44 @@ El \FAnico dato a modificar es el detalle, si no se ingres\F3 al momento de adic
 
 Eliminacion
 S\F3lo es posible eliminar la opini\F3n si es la \FAltima registrada.
-
-
 */
     
+    
+-- Triggers Mantener contenido
+
+--Se deben adicionar unicamente los TIPOS propuestos, la url deben contar con  por lo menos 1 '.', la fecha del contenido puede tener hasta dos dias de diferencia con la actual
+
+CREATE OR REPLACE TRIGGER FECHA_NOMBRE_TIPO_TEMPORAL
+    BEFORE INSERT ON TEMPORAL
+    FOR EACH ROW
+DECLARE 
+    FECHA DATE;
+BEGIN
+    FECHA:= TO_DATE(SYSDATE, 'YYYY-MM-DD');
+    IF ((FECHA-2) > :NEW.FECHA) THEN RAISE_APPLICATION_ERROR(-20006, 'Fecha muy vieja');
+    END IF;
+    IF  (NOT(:NEW.TIPO IN ('F', 'V', 'A'))) THEN RAISE_APPLICATION_ERROR(-20004, 'ERROR DE TIPO');
+    END IF;
+    IF (NOT(:NEW.NOMBRE LIKE '%[^a-zA-Z]%')) THEN  RAISE_APPLICATION_ERROR(-20009, 'FORMATO NOMBRE INCORRECTO');
+    END IF;
+    
+END;
+/
+
+
+
+--Mantener tema
+
+CREATE OR REPLACE TRIGGER AUTO_PALABRA_TEMA
+    AFTER INSERT ON TEMA
+    FOR EACH ROW
+DECLARE 
+BEGIN
+    INSERT INTO PALABRA VALUES(:NEW.NOMBRE,:NEW.PALABRA);
+END AUTO_ADJETIVO;
+/
+
+
 
 
 --poblar sin triggers-----------------------------------------------------------------------------------------------------------
