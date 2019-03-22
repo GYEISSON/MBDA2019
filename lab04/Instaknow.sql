@@ -304,12 +304,14 @@ BEGIN
 END FECHA_OPINION_PERFIL;
 /
 --prueba de trigger anterior
+
 INSERT INTO PERFIL VALUES ('wkidston0@reddit.com', 'Chet Louisot', 0);  
 INSERT INTO PERFIL VALUES ('mdaventry1@php.net', 'Katha Corteney', 0);
 INSERT INTO TEMPORAL VALUES ('incremental',TO_DATE('2006-01-21', 'YYYY-MM-DD'), 'https://macromedia.com.xml', 'A','wkidston0@reddit.com', 3, 'I');
 insert into consulta values(TO_DATE('2019-03-15', 'YYYY-MM-DD'),'mdaventry1@php.net','incremental');
 INSERT INTO OPINION(tipo,justificacion,detalle,perfilc,contenidoid) VALUES('E', 'Ut tellus.', 'momentos de error', 'mdaventry1@php.net', 'incremental');
 
+SELECT * FROM ADJETIVO;
 /*
 Se deben adicionar automáticamente los siguientes adjetivos
 dependiendo del tipo de  opinión: encantador para me encanta,
@@ -318,21 +320,19 @@ confuso para me confunde e
 inapropiado para me enoja.
 
 */
-CREATE OR REPLACE TRIGGER AUTO_ADJETIVOS
-    BEFORE AFTER INSERT INTO OPINION
+CREATE OR REPLACE TRIGGER AUTO_ADJETIVO
+    AFTER INSERT ON OPINION
     FOR EACH ROW
 DECLARE 
 BEGIN
-    IF(:OLD.TIPO = 'E') THEN
-        INSERT INTO ADJETIVO VALUES(:OLD.NUMERO,'Encantador');
-    ELSE IF (:OLD.TIPO = 'G') THEN 
-        INSERT INTO ADJETIVO VALUES(:OLD.NUMERO,'Interesante');
-    ELSE IF (:OLD.TIPO = 'E') THEN 
-        INSERT INTO ADJETIVO VALUES(:OLD.NUMERO,'Confuso');
-    ELSE  
-        INSERT INTO ADJETIVO VALUES(:OLD.NUMERO,'inapropiado');
-    END IF;     
-END AUTO_ADJETIVOS;
+    INSERT INTO ADJETIVO VALUES(:NEW.NUMERO,
+    CASE :NEW.TIPO 
+        WHEN 'E' THEN 'Encantador'
+        WHEN 'G' THEN 'Interesante'
+        WHEN 'E'  THEN 'Confuso'
+        ELSE 'inapropiado'
+    END);
+END AUTO_ADJETIVO;
 /
 
 --Los contenidos no pueden valorarse más de una vez por el mismo perfil.
