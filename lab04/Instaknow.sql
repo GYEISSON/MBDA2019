@@ -277,18 +277,12 @@ BEGIN
     END IF;  
 END;
 /
-<<<<<<< HEAD
-/*
---Los perfiles que dan la opinión deben haber visto el contenido en los ocho días anteriores
--- El perfil que publicó no puede valorar su propio contenido.
-*/
-CREATE OR REPLACE TRIGGER FECHA_OPINION_PERFIL 
-=======
+
 
 --Los perfiles que dan la opini\F3n deben haber visto el contenido en los ocho d\EDas anteriores.
 
 CREATE OR REPLACE TRIGGER FECHA_OPINION 
->>>>>>> refs/remotes/origin/master
+
     BEFORE INSERT ON OPINION
     FOR EACH ROW
 DECLARE
@@ -318,8 +312,8 @@ INSERT INTO TEMPORAL VALUES ('incremental',TO_DATE('2006-01-21', 'YYYY-MM-DD'), 
 insert into consulta values(TO_DATE('2019-03-15', 'YYYY-MM-DD'),'mdaventry1@php.net','incremental');
 INSERT INTO OPINION(tipo,justificacion,detalle,perfilc,contenidoid) VALUES('E', 'Ut tellus.', 'momentos de error', 'mdaventry1@php.net', 'incremental');
 
-<<<<<<< HEAD
-SELECT * FROM ADJETIVO;
+
+
 /*
 Se deben adicionar automáticamente los siguientes adjetivos
 dependiendo del tipo de  opinión: encantador para me encanta,
@@ -349,39 +343,17 @@ ALTER TABLE OPINION ADD CONSTRAINT UK_OPINION_PERFIL_CONTENIDO UNIQUE (perfilc,c
 --Los adjetivos no se pueden repetir.
 ALTER TABLE ADJETIVO ADD CONSTRAINT UK_ADJETIVO_NOMBRE UNIQUE (NOMBRE);
 
-=======
---Los contenidos no pueden valorarse m\E1s de una vez por el mismo perfil.
-
-ALTER TABLE Opinion ADD CONSTRAINT CK_OPINION_TCONSECUTIVO 
-CHECK (select count(perfilc,contenidoid) from contenidos );
->>>>>>> refs/remotes/origin/master
 
 
 /*
 COMO Perfil
-QUIERO adicionar mi opini\F3n
+QUIERO adicionar mi opinion
 PARA PODER colaborar con la calidad de Instaknow
-<<<<<<< HEAD
--   
-Adición
-=======
--
-Adici\F3n
-El n\FAmero y la fecha se asigna autom\E1ticamente
-No se pueden dar opiniones sobre los contenidos bloqueados.
 
-Los perfiles que dan la opini\F3n deben haber visto el contenido en los ocho d\EDas anteriores.
-
-Los contenidos no pueden valorarse m\E1s de una vez por el mismo perfil.
-El perfil que public\F3 no puede valorar su propio contenido.
-Los adjetivos no se pueden repetir.
-Se deben adicionar autom\E1ticamente los siguientes adjetivos dependiendo del tipo de  opini\F3n: encantador para me encanta, interesante para me gusta, confuso para me confunde e inapropiado para me enoja.
->>>>>>> refs/remotes/origin/master
-
-Modificaci\F3n
+Modificacion
 El \FAnico dato a modificar es el detalle, si no se ingres\F3 al momento de adici\F3n.
 
-Eliminaci\F3n
+Eliminacion
 S\F3lo es posible eliminar la opini\F3n si es la \FAltima registrada.
 
 
