@@ -343,19 +343,50 @@ ALTER TABLE OPINION ADD CONSTRAINT UK_OPINION_PERFIL_CONTENIDO UNIQUE (perfilc,c
 --Los adjetivos no se pueden repetir.
 ALTER TABLE ADJETIVO ADD CONSTRAINT UK_ADJETIVO_NOMBRE UNIQUE (NOMBRE);
 
+/*
+Modificacion
+El unico dato a modificar es el detalle, si no se ingreso al momento de adicion.
+*/
+CREATE OR REPLACE TRIGGER UPDATE_DETALLE_OPINION
+    BEFORE UPDATE ON OPINION
+    FOR EACH ROW
+DECLARE 
+    OLD_DETALLE VARCHAR2(20);
+BEGIN
 
+    OLD_DETALLE := :OLD.detalle;
+    IF (OLD_DETALLE IS NOT NULL) THEN
+        RAISE_APPLICATION_ERROR(-20095,'El detalle no se puede actualizar');
+    END IF;
+    IF ((:NEW.NUMERO<>:OLD.NUMERO) OR (:NEW.FECHA<>:OLD.FECHA) OR
+        (:NEW.TIPO<>:OLD.TIPO) OR (:NEW.justificacion<>:OLD.justificacion) OR
+        (:NEW.PERFILC<>:OLD.PERFILC) OR (:NEW.CONTENIDOID<>:OLD.CONTENIDOID) ) THEN
+        RAISE_APPLICATION_ERROR(-20093,'Solo es posible modificar el detalle cuando es nulo.'); 
+    END IF;
+END UPDATE_DETALLE_OPINION;
+/
 
 /*
-COMO Perfil
-QUIERO adicionar mi opinion
-PARA PODER colaborar con la calidad de Instaknow
-
-Modificacion
-El \FAnico dato a modificar es el detalle, si no se ingres\F3 al momento de adici\F3n.
-
 Eliminacion
-S\F3lo es posible eliminar la opini\F3n si es la \FAltima registrada.
+Solo es posible eliminar la opinion si es la ultima registrada.
 */
+CREATE OR REPLACE TRIGGER DELETE_OPINION
+    BEFORE DELETE ON OPINION
+    FOR EACH ROW 
+DECLARE 
+    NUMERO_REGISTRO NUMBER;
+    TOTAL_REGISTRO NUMBER;
+BEGIN 
+    TOTAL_REGISTRO :=0;
+    NUMERO_REGISTRO :=  :OLD.NUMERO;
+    SELECT COUNT(*) INTO TOTAL_REGISTRO FROM OPINION;
+    IF(NUMERO_REGISTRO <> TOTAL_REGISTRO) THEN
+        RAISE_APPLICATION_ERROR(-20089,'Solo es posible eliminar la ultima opinion');
+    END IF; 
+END DELETE_OPINION;
+/
+
+
     
     
 -- Triggers Mantener contenido
