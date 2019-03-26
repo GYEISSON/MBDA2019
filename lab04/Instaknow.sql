@@ -255,7 +255,7 @@ REFERENCES Tema(nombre);
 
 --TRIGGERS REGISTRAR OPINION
 /*
-El n\FAmero y la fecha se asigna autom\E1ticamente
+El numero y la fecha se asigna automaticamente
 No se pueden dar opiniones sobre los contenidos bloqueados.
 */
 
@@ -279,7 +279,7 @@ END;
 /
 
 
---Los perfiles que dan la opini\F3n deben haber visto el contenido en los ocho d\EDas anteriores.
+--Los perfiles que dan la opinion deben haber visto el contenido en los ocho dias anteriores.
 
 CREATE OR REPLACE TRIGGER FECHA_OPINION 
 
@@ -386,7 +386,7 @@ BEGIN
 END DELETE_OPINION;
 /
 
-
+    
     
     
 -- Triggers Mantener contenido
