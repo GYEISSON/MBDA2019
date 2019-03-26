@@ -420,12 +420,15 @@ END;
 CREATE OR REPLACE TRIGGER ETIQUETA_TEMPORAL
     BEFORE INSERT ON TEMPORAL
     FOR EACH ROW
-DECLARE 
-BEGIN
-    IF (:NEW.TIPO = NULL) THEN
-        :NEW.TIPO:= 'F';
-    END IF;
-END;
+DECLARE
+  TEMP VARCHAR2(10);
+BEGIN 
+  SELECT NOMBRE INTO TEMP FROM ETIQUETA WHERE NOMBRE = :NEW.; 
+  --do things when record exists
+EXCEPTION
+  WHEN no_data_found THEN
+  --do things when record doesn't exist
+END; 
 /
 
 
