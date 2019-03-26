@@ -173,6 +173,8 @@ and substr(sigla,3,1) in
 ALTER TABLE Temporal ADD CONSTRAINT CK_TEMPORAL_TTIPO
 CHECK( tipo in ('F','V','A'));
 
+
+
 ALTER TABLE Temporal ADD CONSTRAINT CK_TEMPORAL_TURL
 CHECK (url like('%.%.%'));
 
@@ -253,7 +255,73 @@ REFERENCES Temporal(nombre);
 ALTER TABLE ContenidoTema ADD CONSTRAINT FK_ContenidoTema_Tema FOREIGN KEY (tema)
 REFERENCES Tema(nombre);
 
---TRIGGERS REGISTRAR OPINION
+
+--REGISTRAR OPINION 
+
+/*
+-Tuplas: no hay adiciones en restricciones declarativas de tuplas,
+pero se cuenta con las predefinidas en el dise�o conceptual(TOpinion,TDetalle,TPalabra)
+*/
+-- TuplasOK
+--perfiles
+INSERT INTO PERFIL VALUES ('wkidston0@reddit.com', 'Chet Louisot', 1);
+INSERT INTO PERFIL VALUES ('mdaventry1@php.net', 'Katha Corteney', 0);
+INSERT INTO PERFIL VALUES ('cortas2@mtv.com', 'Marje Langdale', 0);
+INSERT INTO PERFIL VALUES ('ayashunin3@mediafire.com','Ariella Earwaker', 0);
+INSERT INTO PERFIL VALUES ('ajarmain4@yolasite.com', 'Flori Munning', 0);
+INSERT INTO PERFIL VALUES ('mabreheart5@techcrunch.com', 'Merline McDonell', 0);
+INSERT INTO PERFIL VALUES ('sdagon6@youtu.be', 'Christine Rand', 0);
+INSERT INTO PERFIL VALUES ('lgoater7@ucoz.com', 'Daffie Hardstaff', 1);
+INSERT INTO PERFIL VALUES ('zbatteson8@patch.com', 'Stern Bixley', 0);
+INSERT INTO PERFIL VALUES ('jmccart9@mozilla.com', 'Heinrick Corringham', 1);
+--contenidos
+INSERT INTO TEMPORAL VALUES ('incremental',TO_DATE('2006-01-21', 'YYYY-MM-DD'), 'https://macromedia.com.xml', 'A','wkidston0@reddit.com', 3, 'I');
+INSERT INTO TEMPORAL VALUES ('Secured', TO_DATE('2010-01-21', 'YYYY-MM-DD'), 'https://cornell.edu/vestibulum.quam', 'V','mdaventry1@php.net', 46, 'F');
+INSERT INTO TEMPORAL VALUES ('static', TO_DATE('2015-01-21', 'YYYY-MM-DD'), 'http://bloglines.com.s', 'F','cortas2@mtv.com', 48, 'I');
+INSERT INTO TEMPORAL VALUES ('collaboration', TO_DATE('2015-01-21', 'YYYY-MM-DD'), 'https://intel.com.', 'V','ayashunin3@mediafire.com', 72, 'F');
+INSERT INTO TEMPORAL VALUES ('Intuitive',TO_DATE('2011-01-21', 'YYYY-MM-DD'), 'https://webs.com.auctor/gravida/', 'V','ajarmain4@yolasite.com', 45, 'E');
+INSERT INTO TEMPORAL VALUES ('model', TO_DATE('2010-01-21', 'YYYY-MM-DD'), 'https://yolasite.com/tellus/semper.xml', 'A','mabreheart5@techcrunch.com', 69, 'I');
+INSERT INTO TEMPORAL VALUES ('alliance', TO_DATE('2003-01-21', 'YYYY-MM-DD'), 'https://cnn.com/at.turpis/donec/posuere/', 'V','sdagon6@youtu.be', 87, 'I');
+INSERT INTO TEMPORAL VALUES ('intangible', TO_DATE('2001-01-21', 'YYYY-MM-DD'), 'https://1und1.de.', 'V','lgoater7@ucoz.com', 27, 'I');
+INSERT INTO TEMPORAL VALUES ('real-time', TO_DATE('2002-01-21', 'YYYY-MM-DD'), 'https://tinyurl.com.i', 'A','zbatteson8@patch.com', 56, 'E');
+INSERT INTO TEMPORAL VALUES ('application', TO_DATE('2020-01-21', 'YYYY-MM-DD'), 'https://stanford.edu.morbi/', 'A','jmccart9@mozilla.com', 52, 'F');
+INSERT INTO TEMPORAL VALUES ('NEWIA', TO_DATE('2020-01-21', 'YYYY-MM-DD'), 'https://stan.edu.morbi/', 'A','jmccart9@mozilla.com', 53, 'F');
+INSERT INTO TEMPORAL VALUES ('DSFGHJK', TO_DATE('2020-01-21', 'YYYY-MM-DD'), 'https://stan.eduS.morbi/', 'A','jmccart9@mozilla.com', 52, 'F');
+--opiniones
+INSERT INTO OPINION VALUES (1, TO_DATE('2006-01-21', 'YYYY-MM-DD'), 'E', 'Ut tellus.', 'momentos de error', 'wkidston0@reddit.com', 'incremental');
+INSERT INTO OPINION VALUES (2, TO_DATE('2010-01-21', 'YYYY-MM-DD'), 'G', 'Etiam justo.', 'momentos de error', 'mdaventry1@php.net', 'static');
+INSERT INTO OPINION VALUES (3, TO_DATE('2015-01-21', 'YYYY-MM-DD'), 'C', 'Nulla nisl.', 'momentos de error', 'cortas2@mtv.com', 'Secured');
+INSERT INTO OPINION VALUES (4, TO_DATE('2011-01-21', 'YYYY-MM-DD'), 'C', 'Sed ante.', 'momentos negativos', 'ayashunin3@mediafire.com', 'collaboration');
+INSERT INTO OPINION VALUES (5, TO_DATE('2010-01-21', 'YYYY-MM-DD'), 'G', 'Mauris enim.', 'momentos positivos', 'ajarmain4@yolasite.com', 'Intuitive');
+
+--TuplasNoOk
+--Se trata de probar que el ID no puede tener mas de 3 digitos, y la fecha debe ser ingresada como 
+-- tipo fecha y no varchar
+insert into opinion values (1000, '2020-01-21', 'me gusta', 'Morbi a ipsum.', 'interdum', 'jmccart9@mozilla.com', 'support');
+--Acciones 
+
+--Los contenidos no pueden valorarse mas de una vez por el mismo perfil.
+ALTER TABLE OPINION ADD CONSTRAINT UK_OPINION_PERFIL_CONTENIDO UNIQUE (perfilc,contenidoid);
+--Los adjetivos no se pueden repetir.
+ALTER TABLE ADJETIVO ADD CONSTRAINT UK_ADJETIVO_NOMBRE UNIQUE (NOMBRE);
+
+--AccionesOk
+
+--opiniones
+INSERT INTO OPINION VALUES (6, TO_DATE('2003-01-21', 'YYYY-MM-DD'), 'C', 'Morbi  justo.', 'momentos de error', 'mabreheart5@techcrunch.com', 'application');
+INSERT INTO OPINION VALUES (7, TO_DATE('2001-01-21', 'YYYY-MM-DD'), 'G', 'In platea.', 'momentos negativos', 'sdagon6@youtu.be', 'NEWIA');
+INSERT INTO OPINION VALUES (8, TO_DATE('2002-01-21', 'YYYY-MM-DD'), 'E', 'In hac platea .', 'momentos de error', 'lgoater7@ucoz.com', 'intangible');
+INSERT INTO OPINION VALUES (9, TO_DATE('2010-01-21', 'YYYY-MM-DD'), 'G', 'Nulla neque.', 'momentos de error', 'zbatteson8@patch.com', 'real-time');
+--adjetivos
+INSERT INTO ADJETIVO VALUES (1, 'Switch');
+INSERT INTO ADJETIVO VALUES (2, 'Monitored');
+
+--AccionesNoOk
+--el nombre del adjetivo no se debe reptir
+INSERT INTO ADJETIVO VALUES (3, 'Monitored');
+
+--DISPARADORES
+
 /*
 El numero y la fecha se asigna automaticamente
 No se pueden dar opiniones sobre los contenidos bloqueados.
@@ -304,19 +372,11 @@ BEGIN
 
 END FECHA_OPINION_PERFIL;
 /
---prueba de trigger anterior
-
-INSERT INTO PERFIL VALUES ('wkidston0@reddit.com', 'Chet Louisot', 0);  
-INSERT INTO PERFIL VALUES ('mdaventry1@php.net', 'Katha Corteney', 0);
-INSERT INTO TEMPORAL VALUES ('incremental',TO_DATE('2006-01-21', 'YYYY-MM-DD'), 'https://macromedia.com.xml', 'A','wkidston0@reddit.com', 3, 'I');
-insert into consulta values(TO_DATE('2019-03-15', 'YYYY-MM-DD'),'mdaventry1@php.net','incremental');
-INSERT INTO OPINION(tipo,justificacion,detalle,perfilc,contenidoid) VALUES('E', 'Ut tellus.', 'momentos de error', 'mdaventry1@php.net', 'incremental');
-
 
 
 /*
-Se deben adicionar autom�ticamente los siguientes adjetivos
-dependiendo del tipo de  opini�n: encantador para me encanta,
+Se deben adicionar automaticamente los siguientes adjetivos
+dependiendo del tipo de  opinion: encantador para me encanta,
 interesante para me gusta,
 confuso para me confunde e
 inapropiado para me enoja.
@@ -337,11 +397,7 @@ BEGIN
 END AUTO_ADJETIVO;
 /
 
---Los contenidos no pueden valorarse m�s de una vez por el mismo perfil.
-ALTER TABLE OPINION ADD CONSTRAINT UK_OPINION_PERFIL_CONTENIDO UNIQUE (perfilc,contenidoid);
 
---Los adjetivos no se pueden repetir.
-ALTER TABLE ADJETIVO ADD CONSTRAINT UK_ADJETIVO_NOMBRE UNIQUE (NOMBRE);
 
 /*
 Modificacion
@@ -386,9 +442,17 @@ BEGIN
 END DELETE_OPINION;
 /
 
-    
-    
-    
+--DisparadoresOk
+
+INSERT INTO PERFIL VALUES ('wkidston0@reddit.com', 'Chet Louisot', 0);  
+INSERT INTO PERFIL VALUES ('mdaventry1@php.net', 'Katha Corteney', 0);
+INSERT INTO TEMPORAL VALUES ('incremental',TO_DATE('2006-01-21', 'YYYY-MM-DD'), 'https://macromedia.com.xml', 'A','wkidston0@reddit.com', 3, 'I');
+insert into consulta values(TO_DATE('2019-03-15', 'YYYY-MM-DD'),'mdaventry1@php.net','incremental');
+INSERT INTO OPINION(tipo,justificacion,detalle,perfilc,contenidoid) VALUES('E', 'Ut tellus.', 'momentos de error', 'mdaventry1@php.net', 'incremental');
+
+--DisparadoresNoOk
+
+
 -- Triggers Mantener contenido
 
 --La fecha de los logros se debe asignar automáticamente.
@@ -415,7 +479,12 @@ BEGIN
 END;
 /
 
---La información de contenido temporal sólo se permite en videos y audios
+--La informacion de contenido temporal solo se permite en videos y audios
+ 
+ALTER TABLE Temporal ADD CONSTRAINT CK_TEMPORAL_TTIPO2 
+CHECK( tipo in ('V','A'));
+
+
 --Las etiquetas deben estar en las palabras de los temas asociados al contenido
 CREATE OR REPLACE TRIGGER ETIQUETA_TEMPORAL
     BEFORE INSERT ON TEMPORAL
@@ -446,18 +515,6 @@ END AUTO_ADJETIVO;
 
 
 
---poblar sin triggers-----------------------------------------------------------------------------------------------------------
-
-INSERT INTO PERFIL VALUES ('wkidston0@reddit.com', 'Chet Louisot', 1);
-INSERT INTO PERFIL VALUES ('mdaventry1@php.net', 'Katha Corteney', 0);
-INSERT INTO PERFIL VALUES ('cortas2@mtv.com', 'Marje Langdale', 0);
-INSERT INTO PERFIL VALUES ('ayashunin3@mediafire.com','Ariella Earwaker', 0);
-INSERT INTO PERFIL VALUES ('ajarmain4@yolasite.com', 'Flori Munning', 0);
-INSERT INTO PERFIL VALUES ('mabreheart5@techcrunch.com', 'Merline McDonell', 0);
-INSERT INTO PERFIL VALUES ('sdagon6@youtu.be', 'Christine Rand', 0);
-INSERT INTO PERFIL VALUES ('lgoater7@ucoz.com', 'Daffie Hardstaff', 1);
-INSERT INTO PERFIL VALUES ('zbatteson8@patch.com', 'Stern Bixley', 0);
-INSERT INTO PERFIL VALUES ('jmccart9@mozilla.com', 'Heinrick Corringham', 1);
 
 
 INSERT INTO TEMA VALUES ('customizable', 'wkidston0@reddit.com');
@@ -543,21 +600,8 @@ INSERT INTO CONTENIDOTEMA VALUES('real-time','hybrid');
 INSERT INTO CONTENIDOTEMA VALUES('application','hybrid');
 
 
-INSERT INTO OPINION VALUES (1, TO_DATE('2006-01-21', 'YYYY-MM-DD'), 'E', 'Ut tellus.', 'momentos de error', 'wkidston0@reddit.com', 'incremental');
-INSERT INTO OPINION VALUES (2, TO_DATE('2019-03-17', 'YYYY-MM-DD'), 'G', 'Etiam justo.', 'momentos de error', 'mdaventry1@php.net', 'static');
-INSERT INTO OPINION VALUES (3, TO_DATE('2015-01-21', 'YYYY-MM-DD'), 'C', 'Nulla nisl.', 'momentos de error', 'cortas2@mtv.com', 'Secured');
-INSERT INTO OPINION VALUES (4, TO_DATE('2011-01-21', 'YYYY-MM-DD'), 'C', 'Sed ante.', 'momentos negativos', 'ayashunin3@mediafire.com', 'collaboration');
-INSERT INTO OPINION VALUES (5, TO_DATE('2010-01-21', 'YYYY-MM-DD'), 'G', 'Mauris enim.', 'momentos positivos', 'ajarmain4@yolasite.com', 'Intuitive');
-INSERT INTO OPINION VALUES (6, TO_DATE('2003-01-21', 'YYYY-MM-DD'), 'C', 'Morbi  justo.', 'momentos de error', 'mabreheart5@techcrunch.com', 'model');
-INSERT INTO OPINION VALUES (7, TO_DATE('2001-01-21', 'YYYY-MM-DD'), 'G', 'In platea.', 'momentos negativos', 'sdagon6@youtu.be', 'alliance');
-INSERT INTO OPINION VALUES (8, TO_DATE('2002-01-21', 'YYYY-MM-DD'), 'E', 'In hac platea .', 'momentos de error', 'lgoater7@ucoz.com', 'intangible');
-INSERT INTO OPINION VALUES (9, TO_DATE('2010-01-21', 'YYYY-MM-DD'), 'G', 'Nulla neque.', 'momentos de error', 'zbatteson8@patch.com', 'real-time');
-INSERT INTO OPINION VALUES (10, TO_DATE('2020-01-21', 'YYYY-MM-DD'), 'G', 'Morbi a ipsum.', 'momentos positivos', 'jmccart9@mozilla.com', 'application');
 
 
-INSERT INTO ADJETIVO VALUES (1, 'Switch');
-INSERT INTO ADJETIVO VALUES (2, 'Monitored');
-INSERT INTO ADJETIVO VALUES (3, 'Selfenable');
 INSERT INTO ADJETIVO VALUES (4, 'zero');
 INSERT INTO ADJETIVO VALUES (5, 'benchmak');
 INSERT INTO ADJETIVO VALUES (6, 'projection');
@@ -702,18 +746,18 @@ ALTER TABLE Consulta DROP CONSTRAINT PK_PERFIL_CONTENIDO;
 
 DROP  TABLE Adjetivo;
 DROP  TABLE Consulta;
-DROP  TABLE Temporal;
 DROP  TABLE Etiqueta;
-DROP  TABLE Tema;
 DROP  TABLE Palabra;
 DROP  TABLE EsPrerrequisito;
 DROP  TABLE EsSubtema;
-DROP  TABLE Asignatura;
 DROP  TABLE Trata;
-DROP  TABLE Filtro;
 DROP  TABLE ContenidoFiltro;
 DROP TABLE ContenidoTema;
 DROP  TABLE Opinion;    
+DROP  TABLE Temporal;
+DROP  TABLE Tema;
+DROP  TABLE Asignatura;
+DROP  TABLE Filtro;
 DROP  TABLE Perfil;    
     
     
