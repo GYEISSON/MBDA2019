@@ -315,8 +315,8 @@ INSERT INTO OPINION(tipo,justificacion,detalle,perfilc,contenidoid) VALUES('E', 
 
 
 /*
-Se deben adicionar autom·ticamente los siguientes adjetivos
-dependiendo del tipo de  opiniÛn: encantador para me encanta,
+Se deben adicionar automÔøΩticamente los siguientes adjetivos
+dependiendo del tipo de  opiniÔøΩn: encantador para me encanta,
 interesante para me gusta,
 confuso para me confunde e
 inapropiado para me enoja.
@@ -337,7 +337,7 @@ BEGIN
 END AUTO_ADJETIVO;
 /
 
---Los contenidos no pueden valorarse m·s de una vez por el mismo perfil.
+--Los contenidos no pueden valorarse mÔøΩs de una vez por el mismo perfil.
 ALTER TABLE OPINION ADD CONSTRAINT UK_OPINION_PERFIL_CONTENIDO UNIQUE (perfilc,contenidoid);
 
 --Los adjetivos no se pueden repetir.
@@ -391,25 +391,42 @@ END DELETE_OPINION;
     
 -- Triggers Mantener contenido
 
---Se deben adicionar unicamente los TIPOS propuestos, la url deben contar con  por lo menos 1 '.', la fecha del contenido puede tener hasta dos dias de diferencia con la actual
+--La fecha de los logros se debe asignar autom√°ticamente.
 
-CREATE OR REPLACE TRIGGER FECHA_NOMBRE_TIPO_TEMPORAL
+CREATE OR REPLACE TRIGGER FECHA_TEMPORAL
     BEFORE INSERT ON TEMPORAL
     FOR EACH ROW
 DECLARE 
     FECHA DATE;
 BEGIN
     FECHA:= TO_DATE(SYSDATE, 'YYYY-MM-DD');
-    IF ((FECHA-2) > :NEW.FECHA) THEN RAISE_APPLICATION_ERROR(-20006, 'Fecha muy vieja');
+    :NEW.FECHA:=FECHA;  
+END;
+/
+--Si no se indica el tipo se asume que es una foto
+CREATE OR REPLACE TRIGGER TIPO_TEMPORAL
+    BEFORE INSERT ON TEMPORAL
+    FOR EACH ROW
+DECLARE 
+BEGIN
+    IF (:NEW.TIPO = NULL) THEN
+        :NEW.TIPO:= 'F';
     END IF;
-    IF  (NOT(:NEW.TIPO IN ('F', 'V', 'A'))) THEN RAISE_APPLICATION_ERROR(-20004, 'ERROR DE TIPO');
-    END IF;
-    IF (NOT(:NEW.NOMBRE LIKE '%[^a-zA-Z]%')) THEN  RAISE_APPLICATION_ERROR(-20009, 'FORMATO NOMBRE INCORRECTO');
-    END IF;
-    
 END;
 /
 
+--La informaci√≥n de contenido temporal s√≥lo se permite en videos y audios
+--Las etiquetas deben estar en las palabras de los temas asociados al contenido
+CREATE OR REPLACE TRIGGER ETIQUETA_TEMPORAL
+    BEFORE INSERT ON TEMPORAL
+    FOR EACH ROW
+DECLARE 
+BEGIN
+    IF (:NEW.TIPO = NULL) THEN
+        :NEW.TIPO:= 'F';
+    END IF;
+END;
+/
 
 
 --Mantener tema
