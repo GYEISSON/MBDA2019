@@ -1,0 +1,36 @@
+--videos  
+1 Well formed xml
+
+Extensible Markup Language(XML)
+
+	1.Standart for data representation and exchange 
+	2.Document format similar to HTML
+		1. Tags describe contents instead of formatting 
+	3. Also streaming format
+-Basics Constructs
+	1. Tagged elements (nested)
+	2. Attributes 
+	3. Text
+Well formed XML
+
+Displaying XML 
+	adheres to basics structural requirements 
+		1. Single root element 
+		2. Matched tags, proper nesting 
+		3. Unique attributes within elements 
+
+-Use rule_based language to traslate to HTML	
+	1. Cascading stylesheets (CSS)
+	2. Extensible stylesheet language(XSL)
+
+-----------------------------------------------
+DTD,IDS , IDREFs
+
+-Valid XML
+	Adheres to basic structural requirements 
+	-Also adheres to content-specific specification
+		1. Document Type Descriptor(DTD)
+		2. XML Schema (XSD)
+- Document Type Descriptor  ( DTD )
+	1. Grammar-like language for specifying elements, attributes,nesting, ordering,#occurrences
+	2. Also special attribute types ID and IDREF(S)
