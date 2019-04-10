@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
  <Room>
-    <Bed dobles=1 sencillas=0 camarotes=0>      
+    <Bed dobles=2 sencillas=1 camarotes=0>      
     </Bed>
     <Floor Baldosas = "si" Tapete = "" Madera=""> 
     </Floor>
@@ -28,4 +28,4 @@
     <Comments>
         <Comment fecha = "" estrellas ="" >justificacion</Comment>
     </Comments>
-</Romm>
+</Room>
