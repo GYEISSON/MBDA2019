@@ -34,3 +34,5 @@ DTD,IDS , IDREFs
 - Document Type Descriptor  ( DTD )
 	1. Grammar-like language for specifying elements, attributes,nesting, ordering,#occurrences
 	2. Also special attribute types ID and IDREF(S)
+
+--- bueno
