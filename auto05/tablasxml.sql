@@ -12,13 +12,15 @@ PRIMARY KEY (ID);
 INSERT INTO ROOM VALUES (101,'SINGLE',1,
 '<?xml version="1.0"?>
  <Room>
-    <Bed dobles=1
-         sencillas=0 
-         camarotes=0>      
+    <Bed 
+        dobles=1
+        sencillas=0 
+        camarotes=0>      
     </Bed>
-    <Floor Baldosas = "NO" 
-           Tapete = "SI" 
-           Madera="NO"> 
+    <Floor 
+        Baldosas = "NO" 
+        Tapete = "SI" 
+        Madera="NO"> 
     </Floor>
     
     <Showers >
@@ -33,15 +35,22 @@ INSERT INTO ROOM VALUES (101,'SINGLE',1,
     </Views>
 
     <Decorations>
-        <Decoration nombre = "HOLA" clase = "1" autor="AAA">
+        <Decoration 
+            nombre = "HOLA" 
+            clase = "1"
+            autor="AAA">
         </Decoration>
     </Decorations>
     
     <Colors></Colors>
     
-    <Canals satelite ="SI" cable ="NO">
+    <Canals 
+        satelite ="SI" 
+        cable ="NO">
     </Canals>
     <Comments>
-        <Comment fecha = "09/04/2012" estrellas ="" >justificacion</Comment>
+        <Comment 
+            fecha = "09/04/2012" 
+            estrellas ="2">justificacion</Comment>
     </Comments>
 </Room>');
