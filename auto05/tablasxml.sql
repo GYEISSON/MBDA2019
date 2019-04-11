@@ -13,16 +13,10 @@ PRIMARY KEY (ID);
 INSERT INTO ROOM VALUES (101,'SINGLE',1,
 '<?xml version="1.0"?>
  <Room>
-<<<<<<< HEAD
-    <Bed dobles="1"
-         sencillas="0" 
-         camarotes="0">      
-=======
     <Bed 
         dobles="1"
         sencillas="0"
         camarotes="0">      
->>>>>>> refs/remotes/origin/master
     </Bed>
     <Floor 
         Baldosas = "NO" 
@@ -40,15 +34,9 @@ INSERT INTO ROOM VALUES (101,'SINGLE',1,
     </Views>
 
     <Decorations>
-<<<<<<< HEAD
+
         <Decoration nombre = "nuevo amanecer" clase = "1" autor="santiago">
         Resplandeciente y calido diseño 
-=======
-        <Decoration 
-            nombre = "HOLA" 
-            clase = "1"
-            autor="AAA">
->>>>>>> refs/remotes/origin/master
         </Decoration>
     </Decorations>
     
@@ -59,14 +47,6 @@ INSERT INTO ROOM VALUES (101,'SINGLE',1,
         cable ="NO">
     </Canals>
     <Comments>
-<<<<<<< HEAD
-        <Comment fecha = "09/04/2012" estrellas ="0" >justificacion</Comment>
-    </Comments>
-</Room>');
-
-
-
-=======
         <Comment 
             fecha = "09/04/2012" 
             estrellas ="2">justificacion</Comment>
@@ -164,4 +144,3 @@ INSERT INTO ROOM VALUES (103,'FAMILY',3,
             estrellas ="5">justificacion</Comment>
     </Comments>
 </Room>');
->>>>>>> refs/remotes/origin/master
