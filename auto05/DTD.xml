@@ -1,0 +1,11 @@
+<DOCTYPE detalle [
+	<!ELEMENT Room (Bed,Floor?,showers?,views,Decorations,canals,Comments+)>
+	<!ELEMENT views(interior?,jardin?,montana?,piscina?,mar?)>
+	<!ATTLIST % color ("verde","azul","gris") #FIXED >
+	<!ELEMENT Decorations(Decoration,Decoration)>
+	<!ATTLIST Comments Fecha CDATA #REQUIRED Estrellas ("1","2","3","4","5") #REQUIRED Justificacion CDATA #REQUIRED >
+	<!ATTLIST Floor Madera ("SI" | "NO") #IMPLIED Baldosa ("SI","NO") #IMPLIED Tapete ("SI","NO") #IMPLIED >	
+]>
+
+
+
