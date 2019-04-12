@@ -23,24 +23,33 @@ INSERT INTO ROOM VALUES (101,'SINGLE',1,
         Tapete = "SI" 
         Madera="NO"> 
     </Floor>
-    <Showers ducha="SI" duchaLluvia = "NO" bañera= "SI" hidromasaje="NO">
+    <Showers ducha="SI" 
+            duchaLluvia = "NO" 
+            bañera= "SI" 
+            hidromasaje="NO">
     </Showers>
     <Views>
-        <interior>Inmejorable lugar para descansar</interior>
-        <jardin></jardin>
-        <montana></montana>
-        <piscina></piscina>
-        <mar></mar>
+        <interior>Business-focused</interior>
+        <Garden jardin = "SI" ></Garden>
+        <Mountain montana = "SI"></Mountain>
+        <Pool piscina = "NO"></Pool>
+        <Sea mar = "NO"></Sea>
     </Views>
 
     <Decorations>
 
-        <Decoration nombre = "nuevo amanecer" clase = "1" autor="santiago">
-        Resplandeciente y calido diseño 
+        <Decoration nombre = "nuevo amanecer" 
+                    clase = "1" 
+                    autor="SANTIAGO">
+                Resplandeciente y calido diseño 
         </Decoration>
     </Decorations>
     
-    <detalle estampado = "bordes redondos" colorCortinas="rojo" colchas="clasicas">rojo</detalle>
+        <detalle estampado = "bordes redondos" 
+                colorCortinas="rojo" 
+                colchas="clasicas">
+            rojo
+        </detalle>
     
     <Canals 
         satelite ="SI" 
@@ -66,24 +75,33 @@ INSERT INTO ROOM VALUES (102,'DOUBLE',2,
         Tapete = "NO" 
         Madera="NO"> 
     </Floor>
-    <Showers ducha="SI" duchaLluvia = "NO" bañera= "NO" hidromasaje="NO">
+    <Showers ducha="SI" 
+            duchaLluvia = "NO" 
+            bañera= "NO" 
+            hidromasaje="NO">
     </Showers>
     <Views>
-        <interior>Inmejorable lugar para descansar</interior>
-        <jardin></jardin>
-        <montana></montana>
-        <piscina></piscina>
-        <mar></mar>
+        <interior>Business-focused</interior>
+        <Garden jardin = "NO" ></Garden>
+        <Mountain montana = "NO"></Mountain>
+        <Pool piscina = "SI"></Pool>
+        <Sea mar = "NO"></Sea>
     </Views>
 
     <Decorations>
 
-        <Decoration nombre = "amanecer" clase = "3" autor="YEISSON">
+        <Decoration nombre = "amanecer" 
+                    clase = "3" 
+                    autor="YEISSON">
         Extended
         </Decoration>
     </Decorations>
     
-    <detalle estampado = "bordado" colorCortinas="negro" colchas="modernas">negro</detalle>
+    <detalle estampado = "bordado" 
+                colorCortinas="negro" 
+                colchas="modernas">
+                negro
+        </detalle>
     
     <Canals 
         satelite ="SI" 
@@ -92,7 +110,9 @@ INSERT INTO ROOM VALUES (102,'DOUBLE',2,
     <Comments>
         <Comment 
             fecha = "04/11/2012" 
-            estrellas ="2">justificacion</Comment>
+            estrellas ="2">
+            justificacion
+        </Comment>
     </Comments>
 </Room>');
 ---------------------------------------------------------------------------------------------------------
@@ -109,24 +129,31 @@ INSERT INTO ROOM VALUES (103,'FAMILY',3,
         Tapete = "NO" 
         Madera="SI"> 
     </Floor>
-    <Showers ducha="NO" duchaLluvia = "SI" bañera= "SI" hidromasaje="NO">
+    <Showers ducha="NO" 
+            duchaLluvia = "SI" 
+            bañera= "SI" 
+            hidromasaje="NO">
     </Showers>
     <Views>
         <interior>Business-focused</interior>
-        <jardin></jardin>
-        <montana></montana>
-        <piscina></piscina>
-        <mar></mar>
+        <Garden jardin = "NO" ></Garden>
+        <Mountain montana = "SI"></Mountain>
+        <Pool piscina = "NO"></Pool>
+        <Sea mar = "SI"></Sea>
     </Views>
 
     <Decorations>
 
-        <Decoration nombre = "encryption" clase = "2" autor="juan">
+        <Decoration nombre = "encryption" 
+                    clase = "2" 
+                    autor="JUAN">
          Alfa Foxtrot Charlie X-ray  
         </Decoration>
     </Decorations>
     
-    <detalle estampado = " Juliett Tango" colorCortinas="azul" colchas="Sierra">azul</detalle>
+    <detalle estampado = " Juliett Tango" 
+            colorCortinas="azul" 
+            colchas="Sierra">azul</detalle>
     
     <Canals 
         satelite ="NO" 
@@ -142,27 +169,31 @@ INSERT INTO ROOM VALUES (103,'FAMILY',3,
 ---------------------------------------------------------------------------------------------------------
 /* Consultas */
 
-CREATE TABLE ROOM(
-    ID NUMBER(3) NOT NULL,
-	ROOM_TYPE VARCHAR(6) NOT NULL,
-	MAX_OCCUPANCY NUMBER(10) NOT NULL,
-	DETALLES XMLTYPE NOT NULL
-);
+SELECT *
+    FROM ROOM
+    WHERE EXTRACT(DETALLES,'/Room/Bed[@dobles = "1"]') IS NOT NULL;
 
-select ID
-    from ROOM
-    where extract(DETALLES,'/Room/Bed[@dobles = "1"]') is not null;
-
-
-
-
+SELECT *
+    FROM ROOM
+    WHERE EXTRACT(DETALLES,'/Room/Views/Sea[@mar = "SI"]') IS NOT NULL AND
+        EXTRACT(DETALLES,'/Room/Views/Mountain[@montana = "SI"]') IS NOT NULL;
+        
+SELECT ROOM_TYPE 
+    FROM ROOM
+    WHERE EXTRACT(DETALLES,'/Room/Canals[@satelite = "SI"]') IS NOT NULL;
 
 
+SELECT CAST(EXTRACT(DETALLES,'/Room/Decorations/Decoration/@autor') AS VARCHAR2(90))
+    FROM ROOM;
+
+SELECT *
+    FROM ROOM
+    WHERE EXTRACT(DETALLES,'/Room/Views/Sea[@mar = "SI"]') IS NOT NULL AND
+        EXTRACT(DETALLES,'/Room/Views/Mountain[@montana = "SI"]') IS NOT NULL;
 
 
-
-
-
+SELECT CAST(EXTRACT(DETALLES,'//Comments/Comment/@estrellas') AS VARCHAR2(90))
+    FROM ROOM;
 
 
 
