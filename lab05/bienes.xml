@@ -1,0 +1,36 @@
+<Bienes>
+    <Producto codigo="C25369" nombre="Líquido para vidrios" precioVenta="20000" existencias="10" precioCompra="18000">
+        <Descripcion> La esponja esta cubierta en nylon. Largo de esponja y escurridor de caucho: 8 pulgadas. En Unidad.
+        </Descripcion>
+    </Producto>
+    <Producto codigo="C493256" nombre="Jabón en polvo" precioVenta="2000" existencias="100" precioCompra="18000">
+       <Recomendaciones>No dejar al alcance de los niños
+       </Recomendaciones>
+    </Producto>
+    <Producto codigo="C32014" nombre="Limpiador con caucho y esponja" precioVenta="50000">
+       <Componentes> 
+          <Componente> AGUA 930 c.c. </Componente>
+          <Componente> COLOR - ANILINA (VEGETAL) 1 Gramo </Componente>
+          <Componente> GENAPOL LRO 1 c.c. EDTA 1 c.c. </Componente>
+          <Componente> MERGAL 1 c.c. </Componente>
+          <Componente> BUTIL CELLOSOLVE 50 c.c. </Componente>
+          <Componente> ALCOHOL ISOPROPILICO 20 c.c </Componente>
+       </Componentes> 
+    </Producto>
+    <Servicio codigo="LVEDA"  nombre="Lavado vidrios edificios" precioVenta="500000" manoObra="100000">
+       <Insumos>
+          <Insumo producto="C25369" unidades="10"></Insumo>
+          <Insumo producto="C32014" unidades="2"></Insumo>
+       </Insumos>
+       <Recomendaciones>En edificios de más de cinco pisos usar andamios tipo B
+       </Recomendaciones>
+    </Servicio>   
+    <Servicio codigo="LPISO"  nombre="Limpieza pisos acrilicos" precioVenta="40000" manoObra="5000">
+       <Insumos>
+          <Insumo producto="C25369" unidades="10"></Insumo>
+          <Insumo producto="C493256" unidades="1"></Insumo>
+       </Insumos>
+       <Recomendaciones>En edificios de más de cinco pisos usar andamios tipo B
+       </Recomendaciones>
+    </Servicio>  
+</Bienes>
