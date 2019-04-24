@@ -67,6 +67,7 @@ CREATE TABLE Room(
     id NUMBER(11) NOT NULL,
     room_type VARCHAR(6),
     max_occupancy NUMBER(11)
+
 );
 CREATE TABLE Guest(
     id NUMBER(11) NOT NULL,
