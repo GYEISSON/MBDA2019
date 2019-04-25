@@ -422,6 +422,30 @@
       <name>Cali</name>
       <population>1718871</population>
     </city>
+    <city>
+      <name>Cúcuta</name>
+      <population>652320</population>
+    </city>
+    <city>
+      <name>Soledad</name>
+      <population>682910</population>
+    </city>
+    <city>
+      <name>Soacha</name>
+      <population>550054</population>
+    </city>
+    <city>
+      <name>Cartagena de Indias</name>
+      <population>1006323</population>
+    </city>
+    <city>
+      <name>Bucaramanga</name>
+      <population>522439</population>
+    </city>
+    <city>
+      <name>Villavicencio</name>
+      <population>503414</population>
+    </city>
     <language percentage="100">Spanish</language>
   </country>
   <country name="Comoros" population="569237" area="2170"/>
@@ -470,6 +494,19 @@
       <name>Guayaquil</name>
       <population>1300868</population>
     </city>
+        <city>
+      <name>Cuenca</name>
+      <population>331888</population>
+    </city>
+        <city>
+      <name>Santo Domingo</name>
+      <population>305632</population>
+    </city>
+        <city>
+      <name>Machala</name>
+      <population>241606</population>
+    </city>
+    <language percentage="80">Spanish</language>
   </country>
   <country name="Egypt" population="63575108" area="1001450">
     <city>
@@ -984,7 +1021,28 @@
     <language percentage="10">Siraiki</language>
   </country>
   <country name="Palau" population="16952" area="458"/>
+  
   <country name="Panama" population="2655094" area="78200">
+  	<city>
+  	  <name>Panama city</name>
+  	  <population>430299</population>
+  	</city>
+  	<city>
+  	  <name>San miguelito</name>
+  	  <population>315019</population>
+  	</city>
+  	<city>
+  	  <name>Las cumbres</name>
+  	  <population>127440</population>
+  	</city>
+  	<city>
+  	  <name>La Chorrera</name>
+  	  <population>118521</population>
+  	</city>
+  	<city>
+  	  <name>Tocumen</name>
+  	  <population>113174</population>
+  	</city>
     <language percentage="14">English</language>
   </country>
   <country name="Papua New Guinea" population="4394537" area="461690">
@@ -996,6 +1054,23 @@
       <name>Lima</name>
       <population>6321173</population>
     </city>
+    <city>
+    	<name>Arequipa</name>
+    	<population>989919</population>
+    </city>
+        <city>
+    	<name>Trujillo</name>
+    	<population>935147</population>
+    </city>
+        <city>
+    	<name>Chiclayo</name>
+    	<population>801580</population>
+    </city>
+        <city>
+    	<name>Huancayo</name>
+    	<population>501384</population>
+    </city>
+    <language percentage="100">Spanish</language>
   </country>
   <country name="Philippines" population="74480848" area="300000">
     <city>
@@ -1369,6 +1444,19 @@
       <name>Caracas</name>
       <population>1822465</population>
     </city>
+    <city>
+      <name>Valencia</name>
+      <population>2044323</population>
+    </city>
+    <city>
+      <name>Barquisimeto</name>
+      <population>1478733</population>
+    </city>
+    <city>
+      <name>Maracay</name>
+      <population>1426606</population>
+    </city>
+    <language percentage="100">Spanish</language>
   </country>
   <country name="Vietnam" population="73976976" area="329560">
     <city>
