@@ -20,7 +20,7 @@
 	<!ATTLIST language  percentage NMTOKEN #REQUIRED>
 
 ]>
-
+	
 <countries>
   <country name="Afghanistan" population="22664136" area="647500">
     <language percentage="11">Turkic</language>
