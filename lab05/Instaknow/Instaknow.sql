@@ -260,7 +260,7 @@ REFERENCES Tema(nombre);
 
 /*
 -Tuplas: no hay adiciones en restricciones declarativas de tuplas,
-pero se cuenta con las predefinidas en el dise�o conceptual(TOpinion,TDetalle,TPalabra)
+pero se cuenta con las predefinidas en el diseño conceptual(TOpinion,TDetalle,TPalabra)
 */
 -- TuplasOK
 --perfiles
@@ -455,7 +455,7 @@ INSERT INTO OPINION(tipo,justificacion,detalle,perfilc,contenidoid) VALUES('E', 
 
 -- Triggers Mantener contenido
 
---La fecha de los logros se debe asignar automáticamente.
+--La fecha de los logros se debe asignar automÃ¡ticamente.
 
 CREATE OR REPLACE TRIGGER FECHA_TEMPORAL
     BEFORE INSERT ON TEMPORAL
@@ -768,4 +768,5 @@ from contenidoTema,Temporal,Opinion
 where contenidoTema.contenido = temporal.nombre and temporal.nombre = opinion.contenido
 and detalle = 'momentos de error'
 Group by opiniones.numero;
+    
     
