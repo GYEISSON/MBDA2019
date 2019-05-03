@@ -12,8 +12,8 @@ CREATE TABLE Room_type(
 CREATE TABLE Room(
     id NUMBER(11) NOT NULL,
     room_type VARCHAR(6),
-    max_occupancy NUMBER(11)
-
+    max_occupancy NUMBER(11),
+    DETALLE XMLTYPE NOT NULL
 );
 
 CREATE TABLE Guest(

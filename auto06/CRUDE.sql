@@ -1,0 +1,16 @@
+CREATE OR REPLACE PACKAGE Mantener_Habitacion IS 
+	PROCEDURE ADD_ROOM( xn_room_type IN VARCHAR, xn_max_occupancy IN NUMBER, xn_detalle IN XMLTYPE);
+    PROCEDURE DEL_ROOM(xn_id IN NUMBER);
+    PROCEDURE UP_ROOM(xn_id IN NUMBER, xn_room_type IN VARCHAR, xn_max_occupancy IN NUMBER, xn_detalle IN XMLTYPE);
+    FUNCTION CO_ONEBEDROOM RETURN XMLTYPE ;
+    FUNCTION CO_INEXPENSIVEROOM RETURN XMLTYPE;
+    FUNCTION CO_TVROOM RETURN XMLTYPE;
+    FUNCTION CO_NAMESPAINTERSROOM RETURN XMLTYPE;
+    FUNCTION CO_STARSROOM RETURN XMLTYPE;
+END Mantener_Habitacion;
+
+
+CREATE OR REPLACE PACKAGE Registrar_Reservas IS 
+    PROCEDURE ADD_BOOKING(xn_room_no IN NUMBER, xn_guest_id IN NUMBER, xn_occupants IN NUMBER,
+                        nx_room_type_requested IN VARCHAR,xn_nights IN NUMBER, xn_arrival_time IN DATE);
+END Registrar_Habitacion;
