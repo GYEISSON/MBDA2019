@@ -2,7 +2,7 @@ CREATE TABLE ROOM(
     ID NUMBER(3) NOT NULL,
 	ROOM_TYPE VARCHAR(6) NOT NULL,
 	MAX_OCCUPANCY NUMBER(10) NOT NULL,
-	DETALLES XMLTYPE NOT NULL
+	DETALLE XMLTYPE NOT NULL
 );
 	
 ALTER TABLE ROOM ADD CONSTRAINT PK_ROOM
@@ -171,28 +171,28 @@ INSERT INTO ROOM VALUES (103,'FAMILY',3,
 
 SELECT *
     FROM ROOM
-    WHERE EXTRACT(DETALLES,'/Room/Bed[@dobles = "1"]') IS NOT NULL;
+    WHERE EXTRACT(DETALLE,'/Room/Bed[@dobles = "1"]') IS NOT NULL;
 
 SELECT *
     FROM ROOM
-    WHERE EXTRACT(DETALLES,'/Room/Views/Sea[@mar = "SI"]') IS NOT NULL AND
-        EXTRACT(DETALLES,'/Room/Views/Mountain[@montana = "SI"]') IS NOT NULL;
+    WHERE EXTRACT(DETALLE,'/Room/Views/Sea[@mar = "SI"]') IS NOT NULL AND
+        EXTRACT(DETALLE,'/Room/Views/Mountain[@montana = "SI"]') IS NOT NULL;
         
 SELECT ROOM_TYPE 
     FROM ROOM
-    WHERE EXTRACT(DETALLES,'/Room/Canals[@satelite = "SI"]') IS NOT NULL;
+    WHERE EXTRACT(DETALLE,'/Room/Canals[@satelite = "SI"]') IS NOT NULL;
 
 
-SELECT CAST(EXTRACT(DETALLES,'/Room/Decorations/Decoration/@autor') AS VARCHAR2(90))
+SELECT CAST(EXTRACT(DETALLE,'/Room/Decorations/Decoration/@autor') AS VARCHAR2(90))
     FROM ROOM;
 
 SELECT *
     FROM ROOM
-    WHERE EXTRACT(DETALLES,'/Room/Views/Sea[@mar = "SI"]') IS NOT NULL AND
-        EXTRACT(DETALLES,'/Room/Views/Mountain[@montana = "SI"]') IS NOT NULL;
+    WHERE EXTRACT(DETALLE,'/Room/Views/Sea[@mar = "SI"]') IS NOT NULL AND
+        EXTRACT(DETALLE,'/Room/Views/Mountain[@montana = "SI"]') IS NOT NULL;
 
 
-SELECT CAST(EXTRACT(DETALLES,'//Comments/Comment/@estrellas') AS VARCHAR2(90))
+SELECT CAST(EXTRACT(DETALLE,'//Comments/Comment/@estrellas') AS VARCHAR2(90))
     FROM ROOM;
 
 
