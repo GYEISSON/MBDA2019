@@ -7,17 +7,33 @@ CREATE OR REPLACE PACKAGE BODY PC_OPINIONES IS
       EXCEPTION 
       WHEN OTHERS THEN
         ROLLBACK;
-        RAISE_APPLICATION_ERROR(-20010, 'No se puede insertar investigacion.');
+        RAISE_APPLICATION_ERROR(-20010, 'No se puede insertar opinion.');
     END;
-    PROCEDURE EL_INVESTIGACION (xaccidente  IN NUMBER) IS 
+    
+  PROCEDURE EL_OPINION (xnumero IN NUMBER) IS 
     BEGIN 
-      DELETE FROM  INVESTIGACION  WHERE  accidente  = xaccidente;
+      DELETE FROM OPINION WHERE  numero  = xnumero;
 	COMMIT; 
 	EXCEPTION
       WHEN OTHERS THEN 
        ROLLBACK;
-       RAISE_APPLICATION_ERROR(-20000,'Error al eliminar investigacion.');
+       RAISE_APPLICATION_ERROR(-20000,'Error al eliminar opinion.');
    END;
-    
-    
 END PC_OPINIONES;
+
+
+CREATE OR REPLACE PACKAGE BODY PC_CONTENIDOS IS 
+
+  PROCEDURE AD_CONTENIDO (xnombre IN VARCHAR, xurl IN VARCHAR, xtipo IN VARCHAR, xperfil IN VARCHAR, xduracion IN NUMBER, xidioma IN VARCHAR) IS
+    BEGIN
+      INSERT INTO OPINION (nombre ,url ,tipo ,perfil ,duracion,idioma) VALUES (xnombre ,xurl ,xtipo ,xperfilc ,xperfil,xduracion,xidioma);
+      COMMIT;
+      EXCEPTION 
+      WHEN OTHERS THEN
+        ROLLBACK;
+        RAISE_APPLICATION_ERROR(-20010, 'No se puede insertar contenido.');
+    END;
+    
+    
+    
+END PC_CONTENIDOS;

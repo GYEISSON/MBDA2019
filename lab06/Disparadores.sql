@@ -164,6 +164,9 @@ END;
 /
 
 
+
+
+
 --Mantener tema
 
 CREATE OR REPLACE TRIGGER AUTO_PALABRA_TEMA
