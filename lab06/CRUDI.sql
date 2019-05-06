@@ -9,4 +9,15 @@ CREATE OR REPLACE PACKAGE BODY PC_OPINIONES IS
         ROLLBACK;
         RAISE_APPLICATION_ERROR(-20010, 'No se puede insertar investigacion.');
     END;
+    PROCEDURE EL_INVESTIGACION (xaccidente  IN NUMBER) IS 
+    BEGIN 
+      DELETE FROM  INVESTIGACION  WHERE  accidente  = xaccidente;
+	COMMIT; 
+	EXCEPTION
+      WHEN OTHERS THEN 
+       ROLLBACK;
+       RAISE_APPLICATION_ERROR(-20000,'Error al eliminar investigacion.');
+   END;
+    
+    
 END PC_OPINIONES;
