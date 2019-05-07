@@ -8,9 +8,9 @@ Ofthen use higher-level desing tools, but..
 	*Useful to understand why tools produce certain schemas
 
 Design "anomalies"
-	*Redundancy - capture info.multiple times
-	*update anomaly
-	*Delection anomaly-surfing
+	*Redundancy - capture info multiple times
+	*update anomaly - update facts in different places but not all
+	*Delection anomaly - surfing, unknowingly complete deletion of someone in a DB
 
 Desing by decomposition
 	*Start with "mega" relations containing everything 
@@ -28,18 +28,22 @@ Functional Dependencies and BCNF
 	*Storing SSN-SName pair oncefor each college 
 Functional Dependendy 
 	*Same SSN always has same  sname
-	*Should store each SSN´S SNAME only once
+	*Should store each SSNÂ´S SNAME only once
 Boyce-Codd Normal Form if A -> B then A is a key
 	Decompose
 Multivalued Dependencies and 4NF
 	*Redundancy; Update & Delection Anoalies
 	*Multuplicative effect
-	*Not addressed by BCNF: No functional dependencies
+	*If not addressed by BCNF ----> No functional dependencies
 	
 Multivalued Dependency
+	*if a---->>b then we'll get every combination of a with b
+	*Multivalued dependecy is that we'll get every combination
 	*Given SSN has every combination of Cname with HS
 	*Should store each cname and each HS for an SSN once
+	
 Fourth Normal Form
+	*If a---->>b then a is a key
 	*Decompose
 
 Desing by decomposition 
