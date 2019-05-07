@@ -1,0 +1,7 @@
+Funcional Dependecies:
+      *Used to store data - compression (generalization of the notion of keys)
+      *reasoning about queries (optimization)
+      *If A--->B : Para todo A,B = t.A = u.B => t.B = u.A
+      *Based on knowledge of real world
+      *Relations with no duplicates
+      *A->B no es trivial si el subconjunto B no esta contenido en el subconjunto de A
