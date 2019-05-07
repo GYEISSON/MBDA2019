@@ -26,3 +26,27 @@ Properties and Normal Forms
 Functional Dependencies and BCNF
 	*Redundancy; Update & Delection Anoalies
 	*Storing SSN-SName pair oncefor each college 
+Functional Dependendy 
+	*Same SSN always has same  sname
+	*Should store each SSN´S SNAME only once
+Boyce-Codd Normal Form if A -> B then A is a key
+	Decompose
+Multivalued Dependencies and 4NF
+	*Redundancy; Update & Delection Anoalies
+	*Multuplicative effect
+	*Not addressed by BCNF: No functional dependencies
+	
+Multivalued Dependency
+	*Given SSN has every combination of Cname with HS
+	*Should store each cname and each HS for an SSN once
+Fourth Normal Form
+	*Decompose
+
+Desing by decomposition 
+	*"Mega" relations + properties of the data
+	*System decomposes based on properties
+		
+	*Final set of relstions satisfies normal form
+		-- No anomalies, no lost information
+	*Functional dependencies => Boyce-Codd Normal Form
+	*Multivalued dependences => Fourth Normal Form
