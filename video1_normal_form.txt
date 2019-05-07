@@ -1,0 +1,28 @@
+Designing many dsings possible 
+	* Usually many desings possible
+	* Some are(Much) better than others!
+	*How do we choose?
+
+Ofthen use higher-level desing tools, but..
+	*Some designers go straight to relations
+	*Useful to understand why tools produce certain schemas
+
+Design "anomalies"
+	*Redundancy - capture info.multiple times
+	*update anomaly
+	*Delection anomaly-surfing
+
+Desing by decomposition
+	*Start with "mega" relations containing everything 
+	*Decompose into smaller, better relations with the same info.
+	*Can do decomposition automatically
+Automatic decomposition
+	*"Mega" relations + properties of the data
+	*System decomposes based on satisfies normal form
+		- No anomalies, no lost information
+Properties and Normal Forms
+	-Functional dependencies => Boyce-Codd Normal Form
+	-Multivalued dependences => Fourth Normal Form
+Functional Dependencies and BCNF
+	*Redundancy; Update & Delection Anoalies
+	*Storing SSN-SName pair oncefor each college 
