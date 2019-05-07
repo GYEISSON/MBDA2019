@@ -1,0 +1,17 @@
+Boyce-Codd Normal Form
+
+Decomposition of a relational schema
+	*Decomposition A relation in B JOIN C where A = B JOIN C
+Relational desing by decomposition 
+	*"Mega" ralations + properties of the data
+	*System decomposes based on properties
+	-"Good" decompositions only. reassembly poduces the original
+	-Into "good" relations
+Relation R with FDs(functional dependencies) is in BCNF if:
+	For each A -> B, A is a key
+	if not then is a bas desing.
+Does BCNF guarantee a good decomposition?
+	*Removes anomalies?
+	*Can logically reconstruct original relation?
+		Too few o too many tuples?
+	
