@@ -397,8 +397,6 @@ BEGIN
 END AUTO_ADJETIVO;
 /
 
-
-
 /*
 Modificacion
 El unico dato a modificar es el detalle, si no se ingreso al momento de adicion.
