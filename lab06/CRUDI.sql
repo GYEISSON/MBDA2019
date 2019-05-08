@@ -28,6 +28,18 @@ CREATE OR REPLACE PACKAGE BODY PC_OPINIONES IS
             ROLLBACK;  
         RAISE_APPLICATION_ERROR(-20000,'Error al eliminar opinion.');
    END;
+   
+    FUNCTION CO_VIDEOS_OPINIONES RETURN SYS_REFCURSOR IS CO_VIDEO SYS_REFCURSOR;
+    BEGIN
+        OPEN CO_VIDEO FOR 
+            select tema.nombre as Tema, temporal.url as URL,opinion.numero as Opiniones
+            from tema,contenidoTema,Temporal,Opinion
+            where tema.nombre =contenidoTema.tema and  contenidoTema.contenido = temporal.nombre and temporal.nombre = opinion.contenidoid
+            and detalle = 'momentos de error';
+        RETURN CO_VIDEO;
+    END;
+    
+    
 END PC_OPINIONES;
 /
 
@@ -63,6 +75,12 @@ CREATE OR REPLACE PACKAGE BODY PC_CONTENIDOS IS
       WHEN OTHERS THEN 
         ROLLBACK;
         RAISE_APPLICATION_ERROR(-2017,'NO SE PUDO ELIMINAR EL CONTENIDO');
-    END;   
+    END;
+    FUNCTION CO_POPULARES RETURN SYS_REFCURSOR IS POPULARES SYS_REFCURSOR;
+    BEGIN
+        OPEN POPULARES FOR
+            
+        RETURN POPULARES;
+    END;
 END PC_CONTENIDOS;
 /
