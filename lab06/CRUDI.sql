@@ -20,14 +20,17 @@ CREATE OR REPLACE PACKAGE BODY PC_OPINIONES IS
       RAISE_APPLICATION_ERROR(-20019,"No se puede actualizar la opinion");
   END;
   PROCEDURE EL_OPINION (xnumero IN NUMBER) IS 
-    DELETE FROM OPINION WHERE  numero  = xnumero;
-  	COMMIT; 
-  	EXCEPTION
-        WHEN OTHERS THEN 
-         ROLLBACK;
-         RAISE_APPLICATION_ERROR(-20000,'Error al eliminar opinion.');
+    BEGIN
+        DELETE  FROM OPINION WHERE  numero  = xnumero;
+        COMMIT; 
+        EXCEPTION
+            WHEN OTHERS THEN 
+             ROLLBACK;
+             RAISE_APPLICATION_ERROR(-20000,'Error al eliminar opinion.');
    END;
 END PC_OPINIONES;
+/
+
 
 
 CREATE OR REPLACE PACKAGE BODY PC_CONTENIDOS IS 
@@ -65,3 +68,4 @@ CREATE OR REPLACE PACKAGE BODY PC_CONTENIDOS IS
 
     
 END PC_CONTENIDOS;
+/
