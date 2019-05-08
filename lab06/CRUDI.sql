@@ -17,16 +17,16 @@ CREATE OR REPLACE PACKAGE BODY PC_OPINIONES IS
     EXCEPTION
     WHEN OTHERS THEN 
       ROLLBACK;
-      RAISE_APPLICATION_ERROR(-20019,"No se puede actualizar la opinion");
+      RAISE_APPLICATION_ERROR(-20019,'No se puede actualizar la opinion');
   END;
   PROCEDURE EL_OPINION (xnumero IN NUMBER) IS 
-    BEGIN
-        DELETE  FROM OPINION WHERE  numero  = xnumero;
-        COMMIT; 
-        EXCEPTION
-            WHEN OTHERS THEN 
-             ROLLBACK;
-             RAISE_APPLICATION_ERROR(-20000,'Error al eliminar opinion.');
+  BEGIN
+    DELETE  FROM OPINION WHERE  numero  = xnumero;
+    COMMIT; 
+    EXCEPTION
+        WHEN OTHERS THEN 
+            ROLLBACK;  
+        RAISE_APPLICATION_ERROR(-20000,'Error al eliminar opinion.');
    END;
 END PC_OPINIONES;
 /
@@ -37,7 +37,7 @@ CREATE OR REPLACE PACKAGE BODY PC_CONTENIDOS IS
 
   PROCEDURE AD_CONTENIDO (xnombre IN VARCHAR, xurl IN VARCHAR, xtipo IN VARCHAR, xperfil IN VARCHAR, xduracion IN NUMBER, xidioma IN VARCHAR) IS
     BEGIN
-      INSERT INTO TEMPORAL (nombre ,url ,tipo ,perfil ,duracion,idioma) VALUES (xnombre ,xurl ,xtipo ,xperfilc ,xperfil,xduracion,xidioma);
+      INSERT INTO TEMPORAL (nombre ,url ,tipo ,perfil ,duracion,idioma) VALUES (xnombre ,xurl ,xtipo  ,xperfil,xduracion,xidioma);
       COMMIT;
       EXCEPTION   
       WHEN OTHERS THEN
@@ -47,12 +47,12 @@ CREATE OR REPLACE PACKAGE BODY PC_CONTENIDOS IS
     
     PROCEDURE MOD_ETIQUETA_CONTENIDO(xcontenido IN VARCHAR,xnombre IN VARCHAR) IS
     BEGIN
-      UPDATE ETIQUETA SET NOMBRE = XNOMBRE WHERE CONTENIDO = XCONTENIDO;
+      UPDATE ETIQUETA SET NOMBRE = XNOMBRE WHERE temporal = XCONTENIDO;
       COMMIT;
       EXCEPTION
       WHEN OTHERS THEN 
         ROLLBACK;
-        RAISE_APPLICATION_ERROR(-20016,"NO SE PUDO ACTUALIZAR EL CONTENIDO");  
+        RAISE_APPLICATION_ERROR(-20016,'NO SE PUDO ACTUALIZAR EL CONTENIDO');  
     END;
 
     PROCEDURE DEL_CONTENIDO(xnombre IN VARCHAR) IS
@@ -62,10 +62,7 @@ CREATE OR REPLACE PACKAGE BODY PC_CONTENIDOS IS
       EXCEPTION
       WHEN OTHERS THEN 
         ROLLBACK;
-        RAISE_APPLICATION_ERROR(-2017,"NO SE PUDO ELIMINAR EL CONTENIDO");
-    END;
-
-
-    
+        RAISE_APPLICATION_ERROR(-2017,'NO SE PUDO ELIMINAR EL CONTENIDO');
+    END;   
 END PC_CONTENIDOS;
 /
