@@ -77,7 +77,7 @@ END AUTO_ADJETIVO;
 /*
 Modificacion
 El unico dato a modificar es el detalle, si no se ingreso al momento de adicion.
-*/
+
 CREATE OR REPLACE TRIGGER UPDATE_DETALLE_OPINION
     BEFORE UPDATE ON OPINION
     FOR EACH ROW
@@ -95,7 +95,7 @@ BEGIN
         RAISE_APPLICATION_ERROR(-20093,'Solo es posible modificar el detalle cuando es nulo.'); 
     END IF;
 END UPDATE_DETALLE_OPINION;
-/
+*/
 
 /*
 Eliminacion
@@ -144,10 +144,10 @@ END;
 /
 
 --La informacion de contenido temporal solo se permite en videos y audios
- 
+/*
 ALTER TABLE Temporal ADD CONSTRAINT CK_TEMPORAL_TTIPO2 
 CHECK( tipo in ('V','A'));
-
+*/
 
 --Las etiquetas deben estar en las palabras de los temas asociados al contenido
 CREATE OR REPLACE TRIGGER ETIQUETA_TEMPORAL
@@ -170,12 +170,4 @@ END ETIQUETA_TEMPORAL;
 
 
 --Mantener tema
-
-CREATE OR REPLACE TRIGGER AUTO_PALABRA_TEMA
-    AFTER INSERT ON TEMA
-    FOR EACH ROW
-DECLARE 
-BEGIN
-    INSERT INTO PALABRA VALUES(:NEW.NOMBRE,:NEW.PALABRA);
-END AUTO_ADJETIVO;
-/
+--NO DEBE EL TRIGGER

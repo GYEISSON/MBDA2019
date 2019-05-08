@@ -4,10 +4,10 @@ CHECK (numero >0 and numero <=99999);
 ALTER TABLE Perfil ADD CONSTRAINT CK_PERFIL_TCorreo
 CHECK ( correo like ('%@%') and correo not like ('@%') 
         and correo not like ('%@') and correo not like ('%@%@%'));
-
+/*
 ALTER TABLE Opinion ADD CONSTRAINT CK_OPINION_TDETALLE
 CHECK (detalle in ('momentos positivos','momentos negativos','momentos de error') );
-
+*/
 ALTER TABLE Temporal ADD CONSTRAINT CK_TEMPORAL_TDURACION 
 CHECK (duracion >0 and duracion <=180);
 
