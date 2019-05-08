@@ -9,7 +9,7 @@ CREATE TABLE Opinion(
     fecha DATE NOT NULL,
     tipo VARCHAR2(1) NOT NULL,
     justificacion VARCHAR2(20),
-    detalle VARCHAR2(20),
+    detalle XMLTYPE NULL,
     perfilc VARCHAR2(50) NOT NULL,
     contenidoid VARCHAR2(20) NOT NULL
 );
