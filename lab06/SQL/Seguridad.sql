@@ -1,0 +1,20 @@
+--seguridad b
+
+GRANT EXECUTE ON PA_AUDITOR TO bd2154346;
+
+--seguridad c
+
+CREATE ROLE PERFILES;
+
+GRANT PERFILES TO bd2154346;
+GRANT PERFILES TO bd2154346;
+
+--seguridad D 
+
+REVOKE ALL FROM bd2154346;
+DROP ROLE PERFILES;
+
+--seguridad ok
+--seguridad No_ok
+
+
